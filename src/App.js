@@ -1,135 +1,132 @@
+/** React */
 import React from 'react';
-import './App.css';
-import { useStateWithLocalStorage } from './localStorage.js';
-import Alert from 'react-bootstrap/Alert';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
+
+/** CSS */
+import './css/App.css';
+import './css/bootstrap.min.css';
+
+/** react-bootstrap */
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
 import ProgressBar from 'react-bootstrap/ProgressBar'
-import './bootstrap.min.css';
-import { list } from './items';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import Row from 'react-bootstrap/Row';
 
-
-function UpgradeAlert({ todos, upgradeList }) {
-  if (todos.version < list.version)
-    return (
-      <Alert variant='warning'>
-        This is an alert!
-        <div className="d-flex justify-content-end">
-          <Button variant="primary" onClick={() => upgradeList(todos)}>Click here to upgrade</Button>
-        </div>
-      </Alert>
-    );
-  else
-    return (<></>);
-}
-
-function Todo({ todo, index, completeTodo }) {
-  let checkMark = <></>;
-  if (todo.isCompleted) {
-    checkMark = <FontAwesomeIcon icon={faCheckCircle} />
-  }
-  return (
-    <ListGroup.Item >
-      <p style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
-        <span style={{ color: '#00bc8c', marginRight: '1em' }}>{checkMark}</span>
-        {todo.name}
-      </p>
-      <p>
-        <a href={todo.link} target="blank">{todo.link}</a>
-      </p>
-
-      <div>
-        <button onClick={() => completeTodo(index)}>Complete</button>
-      </div>
-    </ListGroup.Item>
-  );
-};
+/** app imports */
+import { TodoItem } from './todoItem';
+import { useStateWithLocalStorage } from './localStorage';
+import { list } from './data/items';
+import { UpgradeAlert } from './upgradeAlert'
 
 function App() {
-  const [todos, setTodos] = useStateWithLocalStorage();
+	const [todos, setTodos] = useStateWithLocalStorage();
 
-  const completeTodo = index => {
-    const version = todos.version;
-    const newTodos = [...todos.items];
-    newTodos[index].isCompleted = true;
-    setTodos({ 'version': version, 'items': newTodos });
-  };
+	/**
+	 * Marks a TodoItem as complete
+	 * @param {string} type  The type of TodoItem ("daily or "weekly)
+	 * @param {int}    index The index of the item in its respective category
+	 */
+	const completeTodo = (type, index) => {
+		const version = todos.version;
+		const newTodos = [...todos[type]];
+		console.log(index);
+		console.log(newTodos);
+		newTodos[index].isCompleted = true;
+		todos[type] = newTodos;
 
-  const reset = type => {
-    const version = todos.version;
-    const newTodos = [...todos.items];
-    newTodos.forEach(element => {
-      if (element.type === type) {
-        element.isCompleted = false;
-      }
-    });
-    setTodos({ 'version': version, 'items': newTodos });
-  }
+		if (type === 'dailies') {
+			setTodos({ 'version': version, 'dailies': newTodos, 'weeklies': todos.weeklies });
+		} else {
+			setTodos({ 'version': version, 'dailies': todos.dailies, 'weeklies': newTodos });
+		}
 
-  const upgradeList = todos => {
-    setTodos(list);
-  }
+		console.log(todos);
+	};
 
-  let now = (todos.items.filter(d => d.isCompleted === true).length / todos.items.length) * 100;
+	/**
+	 * Resets progress on the specified list by marking all items as incomplete
+	 * @param {string} type The type of TodoItem ("daily or "weekly)
+	 */
+	const reset = type => {
+		const version = todos.version;
+		const newTodos = [...todos[type]];
+		newTodos.forEach(element => {
 
-  console.log(now);
+			element.isCompleted = false;
 
-  return (
-    <Container>
-      <UpgradeAlert todos={todos} upgradeList={upgradeList} />
-      <Container>
-        <Row>
-          <Col>
-            <Card>
-              <Card.Header>Dailies</Card.Header>
+		});
+		if (type === 'dailies') {
+			setTodos({ 'version': version, 'dailies': newTodos, 'weeklies': todos.weeklies });
+		} else {
+			setTodos({ 'version': version, 'dailies': todos.dailies, 'weeklies': newTodos });
+		}
+	}
 
-              <ListGroup>
-                {todos.items.filter(d => d.type === 'daily').map((todo, index) => (
-                  <Todo
-                    key={index}
-                    index={index}
-                    todo={todo}
-                    completeTodo={completeTodo}
-                  />
-                ))}
-              </ListGroup>
+	/**
+	 * Provides functionality to upgrade the list in the user's localstorage to a new version 
+	 * in the event that the list was changed.
+	 */
+	const upgradeList = () => {
+		setTodos(list);
+	}
 
-            </Card>
-          </Col>
-          <Col>
-            <ListGroup>
-              {todos.items.filter(d => d.type === 'weekly').map((todo, index) => (
-                <Todo
-                  key={index}
-                  index={index}
-                  todo={todo}
-                  completeTodo={completeTodo}
-                />
-              ))}
-            </ListGroup>
-          </Col>
-        </Row>
-      </Container>
+	// Build values for progress bars
+	let dailyComplete = (todos.dailies.filter(d => d.isCompleted === true).length / todos.dailies.length) * 100;
+	let weeklyComplete = (todos.weeklies.filter(d => d.isCompleted === true).length / todos.weeklies.length) * 100;
 
+	return (
+		<Container>
+			<UpgradeAlert todos={todos} upgradeList={upgradeList} />
+			<Container>
+				<Row>
+					<Col>
+						<Card>
+							<Card.Header>Dailies <ProgressBar now={dailyComplete.toFixed(0)} /></Card.Header>
+							<ListGroup>
+								{todos.dailies.map((todo, index) => (
+									<TodoItem
+										key={index}
+										type='dailies'
+										index={index}
+										todo={todo}
+										completeTodo={completeTodo}
+									/>
+								))}
+							</ListGroup>
+							<Card.Footer><Button onClick={() => reset('dailies')}>Reset Dailies</Button></Card.Footer>
+						</Card>
+					</Col>
+					<Col>
+						<Card>
+							<Card.Header>Weeklies  <ProgressBar now={weeklyComplete.toFixed(0)} /></Card.Header>
+							<ListGroup>
+								{todos.weeklies.map((todo, index) => (
+									<TodoItem
+										key={index}
+										type='weeklies'
+										index={index}
+										todo={todo}
+										completeTodo={completeTodo}
+									/>
+								))}
+							</ListGroup>
+							<Card.Footer><Button onClick={() => reset('weeklies')}>Reset Weeklies</Button></Card.Footer>
+						</Card>
+					</Col>
+				</Row>
+			</Container>
 
-      <Container>
-        <ProgressBar now={now.toFixed(0)} />
-      </Container>
-      <Container>
-        <label>v: {todos.version}</label>
-      </Container>
-      <Container>
-        <Button onClick={() => reset('daily')}>Reset Dailies</Button>
-        <Button onClick={() => reset('weekly')}>Reset Weeklies</Button>
-      </Container>
-    </Container>
-  );
+			<Container>
+				<label>Your list schema version: {todos.version}</label>
+			</Container>
+
+			<Container>
+				<Button onClick={() => upgradeList()}>Upgrade List</Button>
+			</Container>
+		</Container>
+	);
 };
 
 export default App;
