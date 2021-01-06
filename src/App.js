@@ -81,7 +81,7 @@ function App() {
 			<UpgradeAlert todos={todos} upgradeList={upgradeList} />
 			<Container>
 				<Row>
-					<Col>
+					<Col sm={12} md={6}>
 						<Card>
 							<Card.Header>Dailies <ProgressBar now={dailyComplete.toFixed(0)} /></Card.Header>
 							<ListGroup>
@@ -98,7 +98,7 @@ function App() {
 							<Card.Footer><Button onClick={() => reset('dailies')}>Reset Dailies</Button></Card.Footer>
 						</Card>
 					</Col>
-					<Col>
+					<Col sm={12} md={6}>
 						<Card>
 							<Card.Header>Weeklies  <ProgressBar now={weeklyComplete.toFixed(0)} /></Card.Header>
 							<ListGroup>

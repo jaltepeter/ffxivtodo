@@ -1,8 +1,10 @@
 /** react-bootstrap */
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
+import Row from 'react-bootstrap/Row';
 
 /** FontAwesome */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -32,15 +34,23 @@ export function TodoItem({ todo, type, index, completeTodo }) {
 
 	return (
 		<ListGroup.Item >
-			<p style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
-				<span style={{ color: '#00bc8c', marginRight: '1em' }}>{checkMark}</span>
-				{todo.name}
-				<OverlayTrigger trigger='click' placement='right' overlay={popover}>
-					<FontAwesomeIcon icon={faQuestionCircle} style={{ marginLeft: '1em', cursor: 'pointer' }} />
-				</OverlayTrigger>
-			</p>
+			<Row>
+				<Col xs={12} md={8}>
+					<p style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
+						<span style={{ color: '#00bc8c', marginRight: '1em' }}>{checkMark}</span>
+						{todo.name}
+						<OverlayTrigger trigger='click' placement='right' overlay={popover}>
+							<FontAwesomeIcon icon={faQuestionCircle} style={{ marginLeft: '1em', cursor: 'pointer' }} />
+						</OverlayTrigger>
+					</p>
+				</Col>
+				<Col xs={12} md={4} style={{ textAlign: 'right' }}>
+					{completeButton}
+				</Col>
+			</Row>
+
 			<div>
-				{completeButton}
+
 			</div>
 		</ListGroup.Item>
 	);
