@@ -1,6 +1,7 @@
 /** react-bootstrap */
-import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
 import ListGroup from 'react-bootstrap/ListGroup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
@@ -8,18 +9,30 @@ import Row from 'react-bootstrap/Row';
 
 /** FontAwesome */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+
+import emptyIcon from './img/questIconEmpty.png';
+import doneIcon from './img/questIcon.png';
+
+function tagToClass(tag) {
+	return tag.toLowerCase().replace(/\s/g, '');
+}
 
 export function TodoItem({ todo, type, index, completeTodo }) {
 
-	let checkMark = <></>;
-	let completeButton = <></>;
+	let completeButton =
+		<Image
+			src={todo.isCompleted ? doneIcon : emptyIcon}
+			width='30'
+			onClick={() => completeTodo(type, index)}
+			alt="click to mark as complete" />;
 
-	if (todo.isCompleted) {
-		checkMark = <FontAwesomeIcon icon={faCheckCircle} />;
+	let badges;
 
-	} else {
-		completeButton = <Button onClick={() => completeTodo(type, index)} size='sm'>Complete</Button>;
+	if (todo.tags) {
+		badges = todo.tags.map((tag) => (
+			<Badge className={[tagToClass(tag), 'tagbadge']}>{tag}</Badge>
+		))
 	}
 
 	const popover = (
@@ -37,12 +50,13 @@ export function TodoItem({ todo, type, index, completeTodo }) {
 			<Row>
 				<Col xs={12} md={8}>
 					<p style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
-						<span style={{ color: '#00bc8c', marginRight: '1em' }}>{checkMark}</span>
+						{/* <span style={{ color: '#00bc8c', marginRight: '1em' }}>{checkMark}</span> */}
 						{todo.name}
-						<OverlayTrigger trigger='click' placement='right' overlay={popover}>
+						<OverlayTrigger trigger='click' rootClose placement='auto' overlay={popover}>
 							<FontAwesomeIcon icon={faQuestionCircle} style={{ marginLeft: '1em', cursor: 'pointer' }} />
 						</OverlayTrigger>
 					</p>
+					<p>{badges}</p>
 				</Col>
 				<Col xs={12} md={4} style={{ textAlign: 'right' }}>
 					{completeButton}

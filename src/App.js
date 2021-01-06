@@ -2,8 +2,8 @@
 import React from 'react';
 
 /** CSS */
+import './css/dark.bootstrap.min.css';
 import './css/App.css';
-import './css/bootstrap.min.css';
 
 /** react-bootstrap */
 import Button from 'react-bootstrap/Button';
@@ -15,10 +15,12 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import Row from 'react-bootstrap/Row';
 
 /** app imports */
+import { NavBar } from './navBar';
 import { TodoItem } from './todoItem';
 import { useStateWithLocalStorage } from './localStorage';
 import { list } from './data/items';
 import { UpgradeAlert } from './upgradeAlert'
+import { ListGroupItem } from 'react-bootstrap';
 
 function App() {
 	const [todos, setTodos] = useStateWithLocalStorage();
@@ -33,7 +35,7 @@ function App() {
 		const newTodos = [...todos[type]];
 		console.log(index);
 		console.log(newTodos);
-		newTodos[index].isCompleted = true;
+		newTodos[index].isCompleted = !newTodos[index].isCompleted;
 		todos[type] = newTodos;
 
 		if (type === 'dailies') {
@@ -72,19 +74,29 @@ function App() {
 		setTodos(list);
 	}
 
+	const changeTheme = theme => {
+		console.log(`Changing theme to ${theme}.`)
+		import(`./css/${theme}.bootstrap.min.css`);
+	}
+
 	// Build values for progress bars
 	let dailyComplete = (todos.dailies.filter(d => d.isCompleted === true).length / todos.dailies.length) * 100;
 	let weeklyComplete = (todos.weeklies.filter(d => d.isCompleted === true).length / todos.weeklies.length) * 100;
 
 	return (
+
 		<Container>
+			<NavBar changeTheme={changeTheme} />
 			<UpgradeAlert todos={todos} upgradeList={upgradeList} />
 			<Container>
 				<Row>
-					<Col sm={12} md={6}>
-						<Card>
-							<Card.Header>Dailies <ProgressBar now={dailyComplete.toFixed(0)} /></Card.Header>
+					<Col sm={12} md={6} className='todoList'>
+						<Card className='h-100'>
+							<Card.Header>Dailies</Card.Header>
 							<ListGroup>
+								<ListGroupItem>
+									<ProgressBar now={dailyComplete.toFixed(0)} />
+								</ListGroupItem>
 								{todos.dailies.map((todo, index) => (
 									<TodoItem
 										key={index}
@@ -95,11 +107,13 @@ function App() {
 									/>
 								))}
 							</ListGroup>
-							<Card.Footer><Button onClick={() => reset('dailies')}>Reset Dailies</Button></Card.Footer>
+							<Card.Footer>
+								<Button onClick={() => reset('dailies')}>Reset Dailies</Button>
+							</Card.Footer>
 						</Card>
 					</Col>
-					<Col sm={12} md={6}>
-						<Card>
+					<Col sm={12} md={6} className='todoList'>
+						<Card className='h-100'>
 							<Card.Header>Weeklies  <ProgressBar now={weeklyComplete.toFixed(0)} /></Card.Header>
 							<ListGroup>
 								{todos.weeklies.map((todo, index) => (
@@ -112,7 +126,9 @@ function App() {
 									/>
 								))}
 							</ListGroup>
-							<Card.Footer><Button onClick={() => reset('weeklies')}>Reset Weeklies</Button></Card.Footer>
+							<Card.Footer>
+								<Button onClick={() => reset('weeklies')}>Reset Weeklies</Button>
+							</Card.Footer>
 						</Card>
 					</Col>
 				</Row>
@@ -124,6 +140,7 @@ function App() {
 
 			<Container>
 				<Button onClick={() => upgradeList()}>Upgrade List</Button>
+				<Button onClick={() => changeTheme()}>Change Theme</Button>
 			</Container>
 		</Container>
 	);

@@ -1,3 +1,34 @@
-nav {
-  margin-bottom: 2em;
+.todoList {
+	margin-top: 2em;
+}
+
+p {
+	margin-bottom: 0.5em;
+}
+
+/**
+Item tag badges
+*/
+span.tagbadge {
+	margin-right: 0.5em;
+}
+span.dow {
+	color: black;
+	background-color: purple;
+}
+span.dom {
+ color: black;
+ background-color: orchid;
+}
+span.doh {
+	color: black;
+	background-color: coral;	
+}
+span.dol {
+	color: black;
+	background-color: chocolate;
+}
+span.goldsaucer {
+	color: black;
+	background-color: gold;
 }
