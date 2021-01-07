@@ -2,28 +2,22 @@
 import React from 'react';
 
 /** CSS */
-import './css/dark.bootstrap.min.css';
+import './css/bootstrap.min.css';
 import './css/App.css';
 
 /** react-bootstrap */
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import ListGroup from 'react-bootstrap/ListGroup';
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import Row from 'react-bootstrap/Row';
 
 /** app imports */
-import { NavBar } from './navBar';
-import { TodoItem } from './todoItem';
-import { useStateWithLocalStorage } from './localStorage';
-import { list } from './data/items';
+import { TodoList } from './todoList';
+import { UseStateWithLocalStorage } from './localStorage';
+import { List } from './data/items';
 import { UpgradeAlert } from './upgradeAlert'
-import { ListGroupItem } from 'react-bootstrap';
 
 function App() {
-	const [todos, setTodos] = useStateWithLocalStorage();
+	const [todos, setTodos] = UseStateWithLocalStorage();
 
 	/**
 	 * Marks a TodoItem as complete
@@ -31,11 +25,11 @@ function App() {
 	 * @param {int}    index The index of the item in its respective category
 	 */
 	const completeTodo = (type, index) => {
+		console.log(type);
 		const version = todos.version;
 		const newTodos = [...todos[type]];
-		console.log(index);
-		console.log(newTodos);
 		newTodos[index].isCompleted = !newTodos[index].isCompleted;
+		newTodos.sort((a, b) => a.isCompleted - b.isCompleted || a.name.localeCompare(b.name));
 		todos[type] = newTodos;
 
 		if (type === 'dailies') {
@@ -43,8 +37,6 @@ function App() {
 		} else {
 			setTodos({ 'version': version, 'dailies': todos.dailies, 'weeklies': newTodos });
 		}
-
-		console.log(todos);
 	};
 
 	/**
@@ -55,10 +47,9 @@ function App() {
 		const version = todos.version;
 		const newTodos = [...todos[type]];
 		newTodos.forEach(element => {
-
 			element.isCompleted = false;
-
 		});
+		newTodos.sort((a, b) => a.name.localeCompare(b.name));
 		if (type === 'dailies') {
 			setTodos({ 'version': version, 'dailies': newTodos, 'weeklies': todos.weeklies });
 		} else {
@@ -71,12 +62,7 @@ function App() {
 	 * in the event that the list was changed.
 	 */
 	const upgradeList = () => {
-		setTodos(list);
-	}
-
-	const changeTheme = theme => {
-		console.log(`Changing theme to ${theme}.`)
-		import(`./css/${theme}.bootstrap.min.css`);
+		setTodos(List);
 	}
 
 	// Build values for progress bars
@@ -84,63 +70,29 @@ function App() {
 	let weeklyComplete = (todos.weeklies.filter(d => d.isCompleted === true).length / todos.weeklies.length) * 100;
 
 	return (
-
 		<Container>
-			<NavBar changeTheme={changeTheme} />
 			<UpgradeAlert todos={todos} upgradeList={upgradeList} />
 			<Container>
 				<Row>
 					<Col sm={12} md={6} className='todoList'>
-						<Card className='h-100'>
-							<Card.Header>Dailies</Card.Header>
-							<ListGroup>
-								<ListGroupItem>
-									<ProgressBar now={dailyComplete.toFixed(0)} />
-								</ListGroupItem>
-								{todos.dailies.map((todo, index) => (
-									<TodoItem
-										key={index}
-										type='dailies'
-										index={index}
-										todo={todo}
-										completeTodo={completeTodo}
-									/>
-								))}
-							</ListGroup>
-							<Card.Footer>
-								<Button onClick={() => reset('dailies')}>Reset Dailies</Button>
-							</Card.Footer>
-						</Card>
+						<TodoList
+							title='dailies'
+							todos={todos.dailies}
+							completePercent={dailyComplete}
+							completeTodo={completeTodo}
+							reset={reset}
+						/>
 					</Col>
 					<Col sm={12} md={6} className='todoList'>
-						<Card className='h-100'>
-							<Card.Header>Weeklies  <ProgressBar now={weeklyComplete.toFixed(0)} /></Card.Header>
-							<ListGroup>
-								{todos.weeklies.map((todo, index) => (
-									<TodoItem
-										key={index}
-										type='weeklies'
-										index={index}
-										todo={todo}
-										completeTodo={completeTodo}
-									/>
-								))}
-							</ListGroup>
-							<Card.Footer>
-								<Button onClick={() => reset('weeklies')}>Reset Weeklies</Button>
-							</Card.Footer>
-						</Card>
+						<TodoList
+							title='weeklies'
+							todos={todos.weeklies}
+							completePercent={weeklyComplete}
+							completeTodo={completeTodo}
+							reset={reset}
+						/>
 					</Col>
 				</Row>
-			</Container>
-
-			<Container>
-				<label>Your list schema version: {todos.version}</label>
-			</Container>
-
-			<Container>
-				<Button onClick={() => upgradeList()}>Upgrade List</Button>
-				<Button onClick={() => changeTheme()}>Change Theme</Button>
 			</Container>
 		</Container>
 	);

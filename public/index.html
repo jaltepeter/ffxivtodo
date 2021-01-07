@@ -12,6 +12,7 @@
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 
+	<link href="%PUBLIC_URL%/sticky-footer.css" rel="stylesheet">
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,6 +23,8 @@
 	<script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossorigin></script>
 
 	<script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
+
+
 
 	<script>var Alert = ReactBootstrap.Alert;</script>
 	<!--
@@ -43,18 +46,56 @@
 
 <body>
 	<noscript>You need to enable JavaScript to run this app.</noscript>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<span class="navbar-brand">
+			<img src="questIcon.png" width="50" />
+			FFXIV ToDo Tracker
+		</span>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+			aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home
+						<span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Features</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Pricing</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">About</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+						aria-expanded="false">Dropdown</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">Action</a>
+						<a class="dropdown-item" href="#">Another action</a>
+						<a class="dropdown-item" href="#">Something else here</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Separated link</a>
+					</div>
+				</li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search">
+				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
 
+	</nav>
 	<div id="root"></div>
-	<!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+	<footer class="footer" style="margin-top: 2em;">
+		<div class="container" style="text-align: center;">
+			FFXIV Todo Tracker
+		</div>
+	</footer>
 </body>
 
 </html>

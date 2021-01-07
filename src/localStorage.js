@@ -1,9 +1,12 @@
+/** React */
 import React from 'react';
-import { list } from './data/items';
 
-export const useStateWithLocalStorage = () => {
+/** app imports */
+import { List } from './data/items';
+
+export const UseStateWithLocalStorage = () => {
 	const [value, setValue] = React.useState(
-		JSON.parse(localStorage.getItem('ffxivtodos')) || list);
+		JSON.parse(localStorage.getItem('ffxivtodos')) || List);
 
 	React.useEffect(() => {
 		localStorage.setItem('ffxivtodos', JSON.stringify(value));

@@ -3,10 +3,10 @@ import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 
 /** app imports */
-import { list } from './data/items'
+import { List } from './data/items'
 
 export function UpgradeAlert({ todos, upgradeList }) {
-	if (todos.version < list.version)
+	if (todos.version < List.version)
 		return (
 			<Alert variant='warning'>
 				This is an alert!

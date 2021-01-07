@@ -1,4 +1,4 @@
-export const list = {
+export const List = {
 	version: 1,
 	dailies: [
 		{

@@ -7,12 +7,10 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import Row from 'react-bootstrap/Row';
 
-/** FontAwesome */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-
-import emptyIcon from './img/questIconEmpty.png';
+/** images */
 import doneIcon from './img/questIcon.png';
+import emptyIcon from './img/questIconEmpty.png';
+import infoIcon from './img/infoIcon.png';
 
 function tagToClass(tag) {
 	return tag.toLowerCase().replace(/\s/g, '');
@@ -25,13 +23,15 @@ export function TodoItem({ todo, type, index, completeTodo }) {
 			src={todo.isCompleted ? doneIcon : emptyIcon}
 			width='30'
 			onClick={() => completeTodo(type, index)}
+			style={{ cursor: 'pointer' }}
+			title='click to mark as complete'
 			alt="click to mark as complete" />;
 
 	let badges;
 
 	if (todo.tags) {
 		badges = todo.tags.map((tag) => (
-			<Badge className={[tagToClass(tag), 'tagbadge']}>{tag}</Badge>
+			<Badge key={`${todo.name}.${tagToClass(tag)}`} className={[tagToClass(tag), 'tagbadge']}>{tag}</Badge>
 		))
 	}
 
@@ -42,30 +42,22 @@ export function TodoItem({ todo, type, index, completeTodo }) {
 				<a href={todo.link} target="blank">{todo.link}</a>
 			</Popover.Content>
 		</Popover>
-
 	);
 
 	return (
-		<ListGroup.Item >
+		<ListGroup.Item>
 			<Row>
 				<Col xs={12} md={8}>
-					<p style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
-						{/* <span style={{ color: '#00bc8c', marginRight: '1em' }}>{checkMark}</span> */}
-						{todo.name}
-						<OverlayTrigger trigger='click' rootClose placement='auto' overlay={popover}>
-							<FontAwesomeIcon icon={faQuestionCircle} style={{ marginLeft: '1em', cursor: 'pointer' }} />
-						</OverlayTrigger>
-					</p>
+					<h4 style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>{todo.name}</h4>
 					<p>{badges}</p>
 				</Col>
 				<Col xs={12} md={4} style={{ textAlign: 'right' }}>
-					{completeButton}
+					{completeButton}<br />
+					<OverlayTrigger trigger='click' rootClose placement='auto' overlay={popover}>
+						<Image src={infoIcon} style={{ cursor: 'help', marginTop: '3px' }} />
+					</OverlayTrigger>
 				</Col>
 			</Row>
-
-			<div>
-
-			</div>
 		</ListGroup.Item>
 	);
 };
