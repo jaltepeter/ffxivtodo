@@ -16,8 +16,12 @@ import { UseStateWithLocalStorage } from './localStorage';
 import { List } from './data/items';
 import { UpgradeAlert } from './upgradeAlert'
 import { NavBar } from './navBar';
+import { version as app_version } from '../package.json';
 
 function App() {
+
+	console.log(`Version: ${app_version}`);
+
 	const [todos, setTodos] = UseStateWithLocalStorage();
 
 	/**
