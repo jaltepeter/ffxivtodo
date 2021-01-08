@@ -47,17 +47,23 @@ export function TodoItem({ todo, type, index, completeTodo }) {
 	return (
 		<ListGroup.Item>
 			<Row>
-				<Col xs={12} md={8}>
+				<Col xs={10} md={10} >
 					<h4 style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>{todo.name}</h4>
 					<p>{badges}</p>
 				</Col>
-				<Col xs={12} md={4} style={{ textAlign: 'right' }}>
+				<Col xs={2} md={2} style={{ textAlign: 'right' }}>
 					{completeButton}<br />
 					<OverlayTrigger trigger='click' rootClose placement='auto' overlay={popover}>
 						<Image src={infoIcon} style={{ cursor: 'help', marginTop: '3px' }} />
 					</OverlayTrigger>
 				</Col>
 			</Row>
+			{/* <Row>
+				<Col xs={12}>
+					
+				</Col>
+
+			</Row> */}
 		</ListGroup.Item>
 	);
 };

@@ -1,10 +1,10 @@
 export function Footer() {
 	return (
-		<footer class="footer" >
-			<div class="container" >
+		<footer className="footer" >
+			<div className="container" >
 				© {new Date().getFullYear()} FFXIV Todo Tracker
 			</div>
-			<div class="container">
+			<div className="container">
 				<a href='/privacy'>Privacy Policy</a> | <a href='/cookies'>Cookie Policy</a>
 			</div>
 		</footer>
