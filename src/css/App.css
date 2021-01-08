@@ -6,6 +6,22 @@ p {
 	margin-bottom: 0.5em;
 }
 
+.consent-alert {
+	position: fixed;
+	bottom: 15px;
+	left:2%;
+	width: 96%;
+	text-align: center;
+}
+
+footer.footer {
+	margin-top: 2em;
+}
+
+.footer .container {
+	text-align: center;
+}
+
 /**
 Item tag badges
 */
