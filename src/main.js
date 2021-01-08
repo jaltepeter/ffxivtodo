@@ -11,7 +11,6 @@ import { TodoList } from './todoList';
 import { UseStateWithLocalStorage } from './localStorage';
 import { List } from './data/items';
 import { UpgradeAlert } from './upgradeAlert';
-
 import { ConsentAlert } from './consentAlert';
 
 export function Main() {
