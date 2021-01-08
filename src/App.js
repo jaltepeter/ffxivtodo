@@ -15,6 +15,7 @@ import { TodoList } from './todoList';
 import { UseStateWithLocalStorage } from './localStorage';
 import { List } from './data/items';
 import { UpgradeAlert } from './upgradeAlert'
+import { NavBar } from './navBar';
 
 function App() {
 	const [todos, setTodos] = UseStateWithLocalStorage();
@@ -25,7 +26,6 @@ function App() {
 	 * @param {int}    index The index of the item in its respective category
 	 */
 	const completeTodo = (type, index) => {
-		console.log(type);
 		const version = todos.version;
 		const newTodos = [...todos[type]];
 		newTodos[index].isCompleted = !newTodos[index].isCompleted;
@@ -70,31 +70,35 @@ function App() {
 	let weeklyComplete = (todos.weeklies.filter(d => d.isCompleted === true).length / todos.weeklies.length) * 100;
 
 	return (
-		<Container>
-			<UpgradeAlert todos={todos} upgradeList={upgradeList} />
+		<div>
+			<NavBar />
+
 			<Container>
-				<Row>
-					<Col sm={12} md={6} className='todoList'>
-						<TodoList
-							title='dailies'
-							todos={todos.dailies}
-							completePercent={dailyComplete}
-							completeTodo={completeTodo}
-							reset={reset}
-						/>
-					</Col>
-					<Col sm={12} md={6} className='todoList'>
-						<TodoList
-							title='weeklies'
-							todos={todos.weeklies}
-							completePercent={weeklyComplete}
-							completeTodo={completeTodo}
-							reset={reset}
-						/>
-					</Col>
-				</Row>
+				<UpgradeAlert todos={todos} upgradeList={upgradeList} />
+				<Container>
+					<Row>
+						<Col sm={12} md={6} className='todoList'>
+							<TodoList
+								title='dailies'
+								todos={todos.dailies}
+								completePercent={dailyComplete}
+								completeTodo={completeTodo}
+								reset={reset}
+							/>
+						</Col>
+						<Col sm={12} md={6} className='todoList'>
+							<TodoList
+								title='weeklies'
+								todos={todos.weeklies}
+								completePercent={weeklyComplete}
+								completeTodo={completeTodo}
+								reset={reset}
+							/>
+						</Col>
+					</Row>
+				</Container>
 			</Container>
-		</Container>
+		</div>
 	);
 };
 
