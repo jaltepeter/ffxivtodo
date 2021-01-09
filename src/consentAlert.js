@@ -10,8 +10,6 @@ export function ConsentAlert() {
 			disableStyles={true}
 			buttonClasses="consent-button btn btn-success"
 			containerClasses="consent-alert alert alert-info col-lg-12"
-			//style={{ background: "#3a3f44" }}
-			//buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
 			expires={150}
 			overlay>
 			<div className='consent-content'>

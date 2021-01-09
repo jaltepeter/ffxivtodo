@@ -1,3 +1,5 @@
+import React from 'react';
+
 /** react-bootstrap */
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -8,15 +10,26 @@ import Row from 'react-bootstrap/Row';
 
 /** app imports */
 import { TodoItem } from './todoItem';
+import { ResetProgressDialog } from './dialogs/resetProgressDialog';
 
 export function TodoList({ title, todos, completePercent, completeTodo, reset }) {
+
+	const [isModalOpen, setModalOpen] = React.useState(false);
+
+	const showModal = () => {
+		setModalOpen(true);
+	}
+
+	const hideModal = () => {
+		setModalOpen(false);
+	}
 
 	return (
 		<div>
 			<Container>
 				<Row>
 					<Col><h1 style={{ textTransform: 'capitalize' }}>{title}</h1></Col>
-					<Col><Button onClick={() => reset(title)} className='float-right'>Reset</Button></Col>
+					<Col ><Button onClick={() => showModal()} className='resetButton' size='sm'>Reset</Button></Col>
 				</Row>
 			</Container>
 
@@ -33,6 +46,11 @@ export function TodoList({ title, todos, completePercent, completeTodo, reset })
 					/>
 				))}
 			</ListGroup>
+
+			<ResetProgressDialog isModalOpen={isModalOpen}
+				hideModal={hideModal}
+				reset={() => { reset(title); hideModal() }}
+				type={title} />
 
 		</div>
 	);

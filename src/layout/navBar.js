@@ -7,13 +7,13 @@ import Nav from 'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 
 /** images */
-import logo from './img/questIcon.png';
+import logo from '../img/questIcon.png';
 
-import { BetaInfoModal } from './betaInfoModal';
-import { version as app_version } from '../package.json';
+/** components */
+import { ChangeLog } from '../dialogs/changelogDialog';
+import { version as app_version } from '../../package.json';
 
-
-export function NavBar(reset) {
+export function NavBar() {
 
 	const [isModalOpen, setModalOpen] = React.useState(false);
 
@@ -40,7 +40,7 @@ export function NavBar(reset) {
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
-			<BetaInfoModal
+			<ChangeLog
 				isModalOpen={isModalOpen}
 				hideModal={hideModal} />
 		</>

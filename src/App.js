@@ -7,11 +7,11 @@ import './css/bootstrap.min.css';
 import './css/App.css';
 
 /** components */
-import { NavBar } from './navBar';
+import { NavBar } from './layout/navBar';
 import { Main } from './main';
 import { Privacy } from './privacy';
 import { Cookies } from './cookies';
-import { Footer } from './footer';
+import { Footer } from './layout/footer';
 
 export function App() {
 	return (
