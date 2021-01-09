@@ -16,6 +16,9 @@ import { ConsentAlert } from './consentAlert';
 export function Main() {
 	const [todos, setTodos] = UseStateWithLocalStorage();
 
+	const [dailiesCanReset, setDailiesCanReset] = React.useState(todos.dailies.filter(t => t.isCompleted === true).length > 0);
+	const [weekliesCanReset, setWeekliesCanReset] = React.useState(todos.weeklies.filter(t => t.isCompleted === true).length > 0);
+
 	/**
 	 * Marks a TodoItem as complete
 	 * @param {string} type  The type of TodoItem ("daily or "weekly)
@@ -29,8 +32,10 @@ export function Main() {
 		todos[type] = newTodos;
 
 		if (type === 'dailies') {
+			setDailiesCanReset(newTodos.filter(t => t.isCompleted === true).length > 0);
 			setTodos({ 'version': version, 'dailies': newTodos, 'weeklies': todos.weeklies });
 		} else {
+			setWeekliesCanReset(newTodos.filter(t => t.isCompleted === true).length > 0);
 			setTodos({ 'version': version, 'dailies': todos.dailies, 'weeklies': newTodos });
 		}
 	};
@@ -47,8 +52,10 @@ export function Main() {
 		});
 		newTodos.sort((a, b) => a.name.localeCompare(b.name));
 		if (type === 'dailies') {
+			setDailiesCanReset(false);
 			setTodos({ 'version': version, 'dailies': newTodos, 'weeklies': todos.weeklies });
 		} else {
+			setWeekliesCanReset(false);
 			setTodos({ 'version': version, 'dailies': todos.dailies, 'weeklies': newTodos });
 		}
 	}
@@ -78,6 +85,7 @@ export function Main() {
 								completePercent={dailyComplete}
 								completeTodo={completeTodo}
 								reset={reset}
+								canReset={dailiesCanReset}
 							/>
 						</Col>
 						<Col sm={12} md={6} className='todoList'>
@@ -87,6 +95,7 @@ export function Main() {
 								completePercent={weeklyComplete}
 								completeTodo={completeTodo}
 								reset={reset}
+								canReset={weekliesCanReset}
 							/>
 						</Col>
 					</Row>
