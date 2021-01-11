@@ -70,3 +70,8 @@ span.goldsaucer {
 	color: black;
 	background-color: gold;
 }
+
+/** Changelog */
+.changeLog h4 {
+	font-size: larger;
+}
