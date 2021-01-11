@@ -1,11 +1,13 @@
-.todoList {
-	margin-top: 2em;
+/** HTML Elements*/
+body {
+  padding-top: 3rem;
 }
 
 p {
 	margin-bottom: 0.5em;
 }
 
+/** Nav, Consent, and Footer */
 .consent-alert {
 	position: fixed;
 	bottom: 15px;
@@ -22,11 +24,24 @@ footer.footer {
 	text-align: center;
 }
 
+.todoList {
+	margin-top: 2em;
+}
+
+/** List Display */
 .resetButton {
 	position: absolute;
 	bottom: 0px;
 	right: 0;
 	margin-bottom: 8px;
+}
+
+.stickyHeading{
+  position: -webkit-sticky;
+  position: sticky;
+	top: 4rem;
+	z-index: 100;
+	background-color: #272b30;
 }
 
 /**

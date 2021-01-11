@@ -27,7 +27,7 @@ export function NavBar() {
 
 	return (
 		<>
-			<Navbar variant='dark' bg='primary' expand='lg'>
+			<Navbar variant='dark' bg='primary' expand='lg' fixed='top'>
 				<Navbar.Brand href='/'>
 					<Image src={logo} width='40' />FFXIV Todo Tracker
 			</Navbar.Brand>

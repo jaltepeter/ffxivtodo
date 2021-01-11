@@ -26,16 +26,18 @@ export function TodoList({ title, todos, completePercent, completeTodo, reset, c
 	}
 
 	return (
-		<div>
-			<Container>
+		<div className='h-100'>
+			<Container className='stickyHeading'>
 				<Row>
 					<Col><h1 style={{ textTransform: 'capitalize' }}>{title}</h1></Col>
 					<Col ><Button onClick={() => showModal()} className='resetButton' size='sm' disabled={!canReset}>Reset</Button></Col>
 				</Row>
+				<Row  >
+					<Col className='p-0'>
+						<ProgressBar variant='success' now={completePercent.toFixed(0)} style={{ marginBottom: '0.5em' }} />
+					</Col>
+				</Row>
 			</Container>
-
-			<ProgressBar variant='success' now={completePercent.toFixed(0)} style={{ marginBottom: '0.5em' }} />
-
 			<ListGroup>
 				{todos.map((todo, index) => (
 					<TodoItem
@@ -47,12 +49,10 @@ export function TodoList({ title, todos, completePercent, completeTodo, reset, c
 					/>
 				))}
 			</ListGroup>
-
 			<ResetProgressDialog isModalOpen={isModalOpen}
 				hideModal={hideModal}
 				reset={() => { reset(title); hideModal() }}
 				type={title} />
-
 		</div>
 	);
 }
