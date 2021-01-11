@@ -58,7 +58,7 @@ export function TodoItem({ todo, type, index, completeTodo }) {
 				</Col>
 			</Row>
 			<Collapse in={open}>
-				<div id="example-collapse-text">
+				<div id="example-collapse-text" style={{ overflowWrap: 'anywhere' }}>
 					<p>
 						<a href={todo.link} target="blank">{todo.link}</a>
 					</p>
