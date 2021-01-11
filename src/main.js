@@ -10,24 +10,25 @@ import Row from 'react-bootstrap/Row';
 import { TodoList } from './todoList';
 import { UseStateWithLocalStorage } from './localStorage';
 import { List } from './data/items';
+import { NavBar } from './layout/navBar';
 import { UpgradeAlert } from './upgradeAlert';
 import { ConsentAlert } from './consentAlert';
 
 export function Main() {
 	const [todos, setTodos] = UseStateWithLocalStorage();
-
 	const [dailiesCanReset, setDailiesCanReset] = React.useState(todos.dailies.filter(t => t.isCompleted === true).length > 0);
 	const [weekliesCanReset, setWeekliesCanReset] = React.useState(todos.weeklies.filter(t => t.isCompleted === true).length > 0);
+	const [hideShowMode, setHideShowMode] = React.useState(false);
 
 	/**
 	 * Marks a TodoItem as complete
 	 * @param {string} type  The type of TodoItem ("daily or "weekly)
 	 * @param {int}    index The index of the item in its respective category
 	 */
-	const completeTodo = (type, index) => {
+	const completeTodo = (type, name) => {
 		const version = todos.version;
 		const newTodos = [...todos[type]];
-		newTodos[index].isCompleted = !newTodos[index].isCompleted;
+		newTodos.find(t => t.name === name).isCompleted = !newTodos.find(t => t.name === name).isCompleted;
 		newTodos.sort((a, b) => a.isCompleted - b.isCompleted || a.name.localeCompare(b.name));
 		todos[type] = newTodos;
 
@@ -39,6 +40,27 @@ export function Main() {
 			setTodos({ 'version': version, 'dailies': todos.dailies, 'weeklies': newTodos });
 		}
 	};
+
+	const toggleShowHideMode = () => {
+		console.log('toggling');
+		setHideShowMode(!hideShowMode);
+	}
+
+	const hideTodo = (type, name) => {
+		const version = todos.version;
+		const newTodos = [...todos[type]];
+		var todo = newTodos.find(t => t.name === name);
+		todo.hidden = !todo.hidden;
+		todo.isCompleted = false;
+
+		if (type === 'dailies') {
+			setDailiesCanReset(newTodos.filter(t => t.isCompleted === true).length > 0);
+			setTodos({ 'version': version, 'dailies': newTodos, 'weeklies': todos.weeklies });
+		} else {
+			setWeekliesCanReset(newTodos.filter(t => t.isCompleted === true).length > 0);
+			setTodos({ 'version': version, 'dailies': todos.dailies, 'weeklies': newTodos });
+		}
+	}
 
 	/**
 	 * Resets progress on the specified list by marking all items as incomplete
@@ -89,11 +111,14 @@ export function Main() {
 	}
 
 	// Build values for progress bars
-	let dailyComplete = (todos.dailies.filter(d => d.isCompleted === true).length / todos.dailies.length) * 100;
-	let weeklyComplete = (todos.weeklies.filter(d => d.isCompleted === true).length / todos.weeklies.length) * 100;
+	let dailyComplete = (todos.dailies.filter(d => d.hidden !== true && d.isCompleted === true).length / todos.dailies.filter(d => d.hidden !== true).length) * 100;
+	let weeklyComplete = (todos.weeklies.filter(d => d.hidden !== true && d.isCompleted === true).length / todos.weeklies.filter(d => d.hidden !== true).length) * 100;
 
 	return (
 		<div>
+			<NavBar
+				showHideModeEnabled={hideShowMode}
+				toggleShowHideMode={toggleShowHideMode} />
 			<Container>
 				<UpgradeAlert todos={todos} upgradeList={upgradeList} />
 				<Container>
@@ -104,8 +129,10 @@ export function Main() {
 								todos={todos.dailies}
 								completePercent={dailyComplete}
 								completeTodo={completeTodo}
+								hideTodo={hideTodo}
 								reset={reset}
 								canReset={dailiesCanReset}
+								hideShowModeEnabled={hideShowMode}
 							/>
 						</Col>
 						<Col sm={12} md={6} className='todoList'>
@@ -114,8 +141,10 @@ export function Main() {
 								todos={todos.weeklies}
 								completePercent={weeklyComplete}
 								completeTodo={completeTodo}
+								hideTodo={hideTodo}
 								reset={reset}
 								canReset={weekliesCanReset}
+								hideShowModeEnabled={hideShowMode}
 							/>
 						</Col>
 					</Row>

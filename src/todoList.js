@@ -32,7 +32,7 @@ function weeklyResetCountdown() {
 	return resetTime.diffNow(['hours', 'minutes']);
 };
 
-export function TodoList({ title, todos, completePercent, completeTodo, reset, canReset }) {
+export function TodoList({ title, todos, completePercent, completeTodo, hideTodo, reset, canReset, hideShowModeEnabled }) {
 	const [isResetModalOpen, setResetModalOpen] = React.useState(false);
 	const [dailyresetTime, setDailyResetTime] = React.useState(title === 'dailies' ? dailyResetCountdown : weeklyResetCountdown);
 
@@ -45,6 +45,10 @@ export function TodoList({ title, todos, completePercent, completeTodo, reset, c
 
 	const showResetModal = () => setResetModalOpen(true);
 	const hideResetModal = () => setResetModalOpen(false);
+
+	if (hideShowModeEnabled === false) {
+		todos = todos.filter(s => s.hidden !== true);
+	}
 
 	return (
 		<div className='h-100'>
@@ -65,11 +69,13 @@ export function TodoList({ title, todos, completePercent, completeTodo, reset, c
 			<ListGroup>
 				{todos.map((todo, index) => (
 					<TodoItem
-						key={`${title}.${index}`}
+						key={`${title}.${todo.name}`}
 						type={title}
 						index={index}
 						todo={todo}
 						completeTodo={completeTodo}
+						hideTodo={hideTodo}
+						hideShowModeEnabled={hideShowModeEnabled}
 					/>
 				))}
 			</ListGroup>

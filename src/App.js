@@ -7,7 +7,6 @@ import './css/bootstrap.min.css';
 import './css/App.css';
 
 /** components */
-import { NavBar } from './layout/navBar';
 import { Main } from './main';
 import { Privacy } from './privacy';
 import { Cookies } from './cookies';
@@ -16,14 +15,12 @@ import { Footer } from './layout/footer';
 export function App() {
 	return (
 		<div>
-			<NavBar />
 			<Switch>
 				<Route path="/" component={Main} exact />
 				<Route path="/privacy" component={Privacy} exact />
 				<Route path="/cookies" component={Cookies} exact />
 				<Redirect to="/" />
 			</Switch>
-
 			<Footer />
 		</div>
 
