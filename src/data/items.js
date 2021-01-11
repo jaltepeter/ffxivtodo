@@ -1,5 +1,5 @@
 export const List = {
-	version: 1,
+	version: 2,
 	dailies: [
 		{
 			name: "Grand Company Supply",
@@ -40,18 +40,21 @@ export const List = {
 			name: "Retainer Ventures",
 			type: "daily",
 			link: "https://ffxiv.consolegameswiki.com/wiki/Retainer_Ventures",
+			tags: ["Other"],
 			isCompleted: false
 		},
 		{
 			name: "Gardening",
 			type: "daily",
 			link: "https://ffxiv.consolegameswiki.com/wiki/Gardening",
+			tags: ["Other"],
 			isCompleted: false
 		},
 		{
-			name: "Treasure Hunt",
+			name: "Acquire Treasure Hunt Map",
 			type: "daily",
 			link: "https://ffxiv.consolegameswiki.com/wiki/Treasure_Hunt",
+			tags: ["DoW", "DoM"],
 			isCompleted: false
 		},
 		{
@@ -65,6 +68,7 @@ export const List = {
 			name: "Squadron Missions",
 			type: "daily",
 			link: "https://ffxiv.consolegameswiki.com/wiki/Adventurer_Squadrons",
+			tags: ["Other"],
 			isCompleted: false
 		},
 	],
@@ -80,30 +84,35 @@ export const List = {
 			name: "Challenge Log",
 			type: "weekly",
 			link: "https://ffxiv.consolegameswiki.com/wiki/Challenge_Log",
+			tags: ["DoW", "DoM", "DoH", "DoL", "Gold Saucer"],
 			isCompleted: false
 		},
 		{
 			name: "Wondrous Tails",
 			type: "weekly",
 			link: "https://ffxiv.consolegameswiki.com/wiki/Wondrous_Tails",
+			tags: ["DoW", "DoM"],
 			isCompleted: false
 		},
 		{
 			name: "Custom Deliveries",
 			type: "weekly",
 			link: "https://ffxiv.consolegameswiki.com/wiki/Custom_Deliveries",
+			tags: ["DoH", "DoL"],
 			isCompleted: false
 		},
 		{
 			name: "Priority Squadron Mission",
 			type: "weekly",
 			link: "https://ffxiv.consolegameswiki.com/wiki/Adventurer_Squadrons",
+			tags: ["Other"],
 			isCompleted: false
 		},
 		{
 			name: "Doman Enclave Donations",
 			type: "weekly",
 			link: "https://ffxiv.consolegameswiki.com/wiki/Doman_Enclave_Reconstruction",
+			tags: ["Other"],
 			isCompleted: false
 		},
 		{
