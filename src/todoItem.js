@@ -1,10 +1,12 @@
+/** React */
+import React from 'react';
+
 /** react-bootstrap */
 import Badge from 'react-bootstrap/Badge';
 import Col from 'react-bootstrap/Col';
+import Collapse from 'react-bootstrap/Collapse';
 import Image from 'react-bootstrap/Image';
 import ListGroup from 'react-bootstrap/ListGroup';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
 import Row from 'react-bootstrap/Row';
 
 /** images */
@@ -17,6 +19,7 @@ function tagToClass(tag) {
 }
 
 export function TodoItem({ todo, type, index, completeTodo }) {
+	const [open, setOpen] = React.useState(false);
 
 	let completeButton =
 		<Image
@@ -35,15 +38,6 @@ export function TodoItem({ todo, type, index, completeTodo }) {
 		))
 	}
 
-	const popover = (
-		<Popover id={'popover.' + todo.type + '.' + todo.index}>
-			<Popover.Title as='h3'>More Details</Popover.Title>
-			<Popover.Content>
-				<a href={todo.link} target="blank">{todo.link}</a>
-			</Popover.Content>
-		</Popover>
-	);
-
 	return (
 		<ListGroup.Item>
 			<Row>
@@ -53,11 +47,24 @@ export function TodoItem({ todo, type, index, completeTodo }) {
 				</Col>
 				<Col xs={2} md={2} style={{ textAlign: 'right' }}>
 					{completeButton}<br />
-					<OverlayTrigger trigger='click' rootClose placement='auto' overlay={popover}>
-						<Image src={infoIcon} style={{ cursor: 'help', marginTop: '3px' }} />
-					</OverlayTrigger>
+					{/* <OverlayTrigger trigger='click' rootClose placement='auto' overlay={popover}> */}
+					<Image
+						src={infoIcon}
+						style={{ cursor: 'help', marginTop: '3px' }}
+						onClick={() => setOpen(!open)}
+						aria-controls="example-collapse-text"
+						aria-expanded={open} />
+					{/* </OverlayTrigger> */}
 				</Col>
 			</Row>
+			<Collapse in={open}>
+				<div id="example-collapse-text">
+					<p>
+						<a href={todo.link} target="blank">{todo.link}</a>
+					</p>
+				</div>
+			</Collapse>
+
 			{/* <Row>
 				<Col xs={12}>
 					

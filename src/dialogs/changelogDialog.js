@@ -23,6 +23,7 @@ export function ChangeLog({ isModalOpen, hideModal }) {
 				</ul>
 				<h4>Enhancements</h4>
 				<ul>
+					<li>Move the 'more info' section to a collapsing section to accomodate future improvements</li>
 					<li>Added countdown timer to server reset time</li>
 					<li>Section headers and progress bar now stick to the top of each column when scrolling</li>
 				</ul>
