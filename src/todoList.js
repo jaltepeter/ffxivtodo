@@ -1,5 +1,5 @@
 /** React */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 /** react-bootstrap */
 import Button from 'react-bootstrap/Button';
@@ -13,24 +13,48 @@ import Row from 'react-bootstrap/Row';
 import { TodoItem } from './todoItem';
 import { ResetProgressDialog } from './dialogs/resetProgressDialog';
 
+/** luxon */
+import { DateTime } from 'luxon';
+
+function dailyResetCountdown() {
+	var resetTime = DateTime.local().setZone("America/Los_Angeles").set({ hours: 8, minutes: 0, seconds: 0 });
+	if (resetTime < DateTime.local()) {
+		resetTime = resetTime.plus({ days: 1 });
+	}
+	return resetTime.diffNow(['hours', 'minutes']);
+};
+
+function weeklyResetCountdown() {
+	var resetTime = DateTime.local().setZone("America/Los_Angeles").set({ weekday: 2, hours: 1, minutes: 0, seconds: 0 });
+	if (resetTime < DateTime.local()) {
+		resetTime = resetTime.plus({ weeks: 1 });
+	}
+	return resetTime.diffNow(['hours', 'minutes']);
+};
+
 export function TodoList({ title, todos, completePercent, completeTodo, reset, canReset }) {
+	const [isResetModalOpen, setResetModalOpen] = React.useState(false);
+	const [dailyresetTime, setDailyResetTime] = React.useState(title === 'dailies' ? dailyResetCountdown : weeklyResetCountdown);
 
-	const [isModalOpen, setModalOpen] = React.useState(false);
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setDailyResetTime(title === 'dailies' ? dailyResetCountdown : weeklyResetCountdown);
+		}, 60000);
+		return () => clearInterval(interval);
+	})
 
-	const showModal = () => {
-		setModalOpen(true);
-	}
-
-	const hideModal = () => {
-		setModalOpen(false);
-	}
+	const showResetModal = () => setResetModalOpen(true);
+	const hideResetModal = () => setResetModalOpen(false);
 
 	return (
 		<div className='h-100'>
 			<Container className='stickyHeading'>
 				<Row>
-					<Col><h1 style={{ textTransform: 'capitalize' }}>{title}</h1></Col>
-					<Col ><Button onClick={() => showModal()} className='resetButton' size='sm' disabled={!canReset}>Reset</Button></Col>
+					<Col xs='6' style={{ paddingLeft: '0' }}><h1 style={{ textTransform: 'capitalize' }}>{title}</h1></Col>
+					<Col xs='6' style={{ paddingRight: '0', textAlign: 'right' }}>
+						<Button onClick={() => showResetModal()} className='resetButton' size='sm' disabled={!canReset}>Reset Progress</Button><br />
+						<small>Server resets in {dailyresetTime.hours}:{Math.floor(dailyresetTime.minutes).toString().padStart(2, 0)}</small>
+					</Col>
 				</Row>
 				<Row  >
 					<Col className='p-0'>
@@ -49,9 +73,9 @@ export function TodoList({ title, todos, completePercent, completeTodo, reset, c
 					/>
 				))}
 			</ListGroup>
-			<ResetProgressDialog isModalOpen={isModalOpen}
-				hideModal={hideModal}
-				reset={() => { reset(title); hideModal() }}
+			<ResetProgressDialog isModalOpen={isResetModalOpen}
+				hideModal={hideResetModal}
+				reset={() => { reset(title); hideResetModal() }}
 				type={title} />
 		</div>
 	);

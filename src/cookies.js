@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap"
 
 export function Cookies() {
 	return (
-		<Container>
+		<Container className='policyContainer'>
 			<h2>Cookie Policy</h2>
 			<p>This is the Cookie Policy for FFXIV Todo Tracker, accessible from http://ffxivtodo.com</p>
 

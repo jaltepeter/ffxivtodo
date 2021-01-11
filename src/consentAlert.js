@@ -13,7 +13,7 @@ export function ConsentAlert() {
 			expires={150}
 			overlay>
 			<div className='consent-content'>
-				<p>This website may cookies to enhance the user experience and provide anonymous usage analytics.</p>
+				<p>This website may use cookies to enhance your user experience and provide anonymous usage analytics.</p>
 				<p>To find out more, please read our <a href='/privacy'>privacy policy</a> and <a href='/cookies'>cookie policy</a>.</p>
 			</div>
 		</CookieConsent>
