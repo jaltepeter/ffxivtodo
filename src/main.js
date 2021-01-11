@@ -65,7 +65,27 @@ export function Main() {
 	 * in the event that the list was changed.
 	 */
 	const upgradeList = () => {
-		setTodos(List);
+		let newTodos = List;
+
+		newTodos.dailies.forEach((i) => {
+			var curr = todos.dailies.find(obj => obj.name === i.name);
+			if (curr) {
+				i.isCompleted = curr.isCompleted;
+			}
+		});
+		newTodos.dailies = List.dailies.sort((a, b) => a.isCompleted - b.isCompleted || a.name.localeCompare(b.name));
+		setDailiesCanReset(newTodos.dailies.filter(t => t.isCompleted === true).length > 0);
+
+		newTodos.weeklies.forEach((i) => {
+			var curr = todos.weeklies.find(obj => obj.name === i.name);
+			if (curr) {
+				i.isCompleted = curr.isCompleted;
+			}
+		});
+		newTodos.weeklies = List.weeklies.sort((a, b) => a.isCompleted - b.isCompleted || a.name.localeCompare(b.name));
+		setWeekliesCanReset(newTodos.weeklies.filter(t => t.isCompleted === true).length > 0);
+
+		setTodos(newTodos);
 	}
 
 	// Build values for progress bars

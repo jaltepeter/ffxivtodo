@@ -28,6 +28,15 @@ footer.footer {
 	margin-top: 2em;
 }
 
+/** Upgrade Alert */
+.upgradeAlert {
+	top: 5rem;
+	left: 50%;
+	position: fixed;
+	transform: translate(-50%, 0px);
+	z-index: 9999;
+}
+
 /** List Display */
 .resetButton {
 	position: absolute;
@@ -69,6 +78,10 @@ span.dol {
 span.goldsaucer {
 	color: black;
 	background-color: gold;
+}
+span.other {
+	color: black;
+	background-color: lightgray;
 }
 
 /** Changelog */
