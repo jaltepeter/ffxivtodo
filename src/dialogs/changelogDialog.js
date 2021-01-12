@@ -16,6 +16,11 @@ export function ChangeLog({ isModalOpen, hideModal }) {
 				<p><strong>Thank you for helping to test this beta version!</strong></p>
 				<p>Please report any issues or suggestions on the <a href='https://github.com/Brunhine/ffxivtodo/issues' target='blank'>GitHub issue Tracker</a></p>
 				<hr />
+				<h3>v0.5.0</h3>
+				<ul>
+					<li>Added ability to hide and show specific items in the list under 'options'</li>
+				</ul>
+				<hr />
 				<h3>v0.4.0</h3>
 				<h4>Fixes</h4>
 				<ul>

@@ -22,8 +22,8 @@ export function Main() {
 
 	/**
 	 * Marks a TodoItem as complete
-	 * @param {string} type  The type of TodoItem ("daily or "weekly)
-	 * @param {int}    index The index of the item in its respective category
+	 * @param {string} type The type of TodoItem ("daily or "weekly)
+	 * @param {int}    name The name of the item in its respective category
 	 */
 	const completeTodo = (type, name) => {
 		const version = todos.version;
@@ -41,11 +41,19 @@ export function Main() {
 		}
 	};
 
+	/**
+	 * Toggles Show/Hide mode so that users can hide or show specific list items
+	 */
 	const toggleShowHideMode = () => {
 		console.log('toggling');
 		setHideShowMode(!hideShowMode);
 	}
 
+	/**
+	 * Toggles the 'hidden'property for the specified list item
+	 * @param {string} type The category of the list item
+	 * @param {string} name The name of the item to be hidden or shown
+	 */
 	const hideTodo = (type, name) => {
 		const version = todos.version;
 		const newTodos = [...todos[type]];
