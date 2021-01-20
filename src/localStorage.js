@@ -13,13 +13,13 @@ function getDefaultList() {
 	return list;
 }
 
-export const UseStateWithLocalStorage = () => {
+export const UseStateWithLocalStorage = localStorageKey => {
 	const [value, setValue] = React.useState(
-		JSON.parse(localStorage.getItem('ffxivtodos')) || getDefaultList());
+		JSON.parse(localStorage.getItem(localStorageKey)) || (localStorageKey === 'ffxivtodos' ? getDefaultList() : {}));
 
 	React.useEffect(() => {
-		localStorage.setItem('ffxivtodos', JSON.stringify(value));
-	}, [value]);
+		localStorage.setItem(localStorageKey, JSON.stringify(value));
+	}, [value, localStorageKey]);
 
 	return [value, setValue];
 };

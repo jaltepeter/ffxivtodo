@@ -12,20 +12,23 @@ import logo from '../img/questIcon.png';
 
 /** components */
 import { ChangeLog } from '../dialogs/changelogDialog';
-import { version as app_version } from '../../package.json';
+import { PreferencesDialog } from '../dialogs/preferencesDialog';
 import { NavDropdown } from 'react-bootstrap';
+
+import { version as app_version } from '../../package.json';
 
 export function NavBar({ showHideModeEnabled, toggleShowHideMode }) {
 
-	const [isModalOpen, setModalOpen] = React.useState(false);
+	const [isChangeLogModalOpen, setChangeLogModalOpen] = React.useState(false);
+	const [isPreferencesModalOpen, setPreferencesModalOpen] = React.useState(false);
 
-	const showModal = () => {
-		setModalOpen(true);
-	}
+	const showChangeLog = () => { setChangeLogModalOpen(true); }
 
-	const hideModal = () => {
-		setModalOpen(false);
-	}
+	const hideChangeLog = () => { setChangeLogModalOpen(false); }
+
+	const showPreferences = () => { setPreferencesModalOpen(true); }
+
+	const hidePreferences = () => { setPreferencesModalOpen(false); }
 
 	return (
 		<>
@@ -37,23 +40,31 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode }) {
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='mr-auto'></Nav>
 					<Nav>
-						<Nav.Link onClick={showModal}>Beta {app_version}</Nav.Link>
+						<Nav.Link onClick={showChangeLog}>Beta {app_version}</Nav.Link>
 					</Nav>
 					<Nav >
 						<NavDropdown title='Options' alignRight id='nav-options-dropdown'>
 							<NavDropdown.Item onClick={toggleShowHideMode}>
 								{/* {showHideModeEnabled ? <FontAwesomeIcon icon={faToggleOn} /> : <FontAwesomeIcon icon={faToggleOff} />} Show/Hide Mode */}
-								<Form.Check
+								{/* <Form.Check
 									custom
-									label='Show/Hide Mode' checked={showHideModeEnabled}></Form.Check>
+									label='Show/Hide Mode'
+									checked={showHideModeEnabled}
+									readOnly></Form.Check> */}
+								{showHideModeEnabled ? 'Exit' : 'Enter'} Show/Hide Mode
 							</NavDropdown.Item>
+							<NavDropdown.Divider />
+							<NavDropdown.Item onClick={showPreferences}>Preferences</NavDropdown.Item>
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
 			<ChangeLog
-				isModalOpen={isModalOpen}
-				hideModal={hideModal} />
+				isModalOpen={isChangeLogModalOpen}
+				hideModal={hideChangeLog} />
+			<PreferencesDialog
+				isModalOpen={isPreferencesModalOpen}
+				hideModal={hidePreferences} />
 		</>
 	);
 

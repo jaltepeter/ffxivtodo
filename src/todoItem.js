@@ -14,17 +14,19 @@ import Row from 'react-bootstrap/Row';
 import doneIcon from './img/questIcon.png';
 import emptyIcon from './img/questIconEmpty.png';
 import infoIcon from './img/infoIcon.png';
+import cgwLogo from './img/cgw.png';
+import geLogo from './img/ge.png';
 
 /** FontAwesome */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faLink } from '@fortawesome/free-solid-svg-icons';
 
 function tagToClass(tag) {
 	return tag.toLowerCase().replace(/\s/g, '');
 }
 
-export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabled }) {
-	const [open, setOpen] = React.useState(false);
+export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabled, preferences }) {
+	const [open, setOpen] = React.useState(preferences.alwaysShowInfo);
 
 	let completeButton =
 		<Image
@@ -34,6 +36,37 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 			style={{ cursor: 'pointer' }}
 			title='click to mark as complete'
 			alt="click to mark as complete" />;
+
+	function LinkLogo({ source }) {
+		if (source !== 'other') {
+			var logo;
+			switch (source) {
+				case 'cgw':
+					logo = cgwLogo;
+					break;
+				case 'ge':
+					logo = geLogo;
+					break;
+				default:
+					break;
+			}
+			return (<img className='linkLogo' src={logo} alt='' />)
+		} else {
+			return (<FontAwesomeIcon icon={faLink} />);
+		}
+	}
+
+	function ExternalLink({ source, url }) {
+
+		if ((source === 'cgw' && !preferences.hideCGWLinks)
+			|| (source === 'ge' && !preferences.hideGELinks)) {
+			return (
+				<p className="todoLink"><LinkLogo source={source} /> <a href={url} target="blank">{url}</a></p>
+			);
+		} else {
+			return null;
+		}
+	}
 
 	function HideShowButton() {
 		return (
@@ -62,32 +95,32 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 				{hideShowModeEnabled === false
 					? <Col xs={3} md={3} style={{ textAlign: 'right' }}>
 						{completeButton}<br />
-						<Image
-							src={infoIcon}
-							style={{ cursor: 'help', marginTop: '3px' }}
-							onClick={() => setOpen(!open)}
-							aria-controls="example-collapse-text"
-							aria-expanded={open} />
+						{preferences.alwaysShowInfo !== true &&
+							<Image
+								src={infoIcon}
+								style={{ cursor: 'help', marginTop: '3px' }}
+								onClick={() => setOpen(!open)}
+								aria-controls="example-collapse-text"
+								aria-expanded={open}
+								title='click to show more info'
+							/>
+						}
 					</Col>
 					: <Col xs={3} md={3} style={{ textAlign: 'right' }}><HideShowButton /></Col>
 				}
 			</Row>
 			<Collapse in={open}>
 				<div id="example-collapse-text" style={{ overflowWrap: 'anywhere' }}>
-					<p>
-						<a href={todo.link} target="blank">{todo.link}</a>
-					</p>
+					<h5>Links</h5>
+					{todo.links && todo.links.map((link, index) => (
+						<ExternalLink
+							source={link.source}
+							url={link.url}
+							key={link.url}
+						/>
+					))}
 				</div>
 			</Collapse>
-
-
-
-			{/* <Row>
-				<Col xs={12}>
-					
-				</Col>
-
-			</Row> */}
 		</ListGroup.Item>
 	);
 

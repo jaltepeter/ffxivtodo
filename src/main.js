@@ -15,10 +15,13 @@ import { UpgradeAlert } from './upgradeAlert';
 import { ConsentAlert } from './consentAlert';
 
 export function Main() {
-	const [todos, setTodos] = UseStateWithLocalStorage();
+	const [todos, setTodos] = UseStateWithLocalStorage('ffxivtodos');
+	const [preferences, setPreferences] = UseStateWithLocalStorage('preferences');
 	const [dailiesCanReset, setDailiesCanReset] = React.useState(todos.dailies.filter(t => t.isCompleted === true).length > 0);
 	const [weekliesCanReset, setWeekliesCanReset] = React.useState(todos.weeklies.filter(t => t.isCompleted === true).length > 0);
 	const [hideShowMode, setHideShowMode] = React.useState(false);
+
+
 
 	/**
 	 * Marks a TodoItem as complete
@@ -118,6 +121,8 @@ export function Main() {
 		setTodos(newTodos);
 	}
 
+	window.upgradeList = upgradeList;
+
 	// Build values for progress bars
 	let dailyComplete = (todos.dailies.filter(d => d.hidden !== true && d.isCompleted === true).length / todos.dailies.filter(d => d.hidden !== true).length) * 100;
 	let weeklyComplete = (todos.weeklies.filter(d => d.hidden !== true && d.isCompleted === true).length / todos.weeklies.filter(d => d.hidden !== true).length) * 100;
@@ -126,7 +131,9 @@ export function Main() {
 		<div>
 			<NavBar
 				showHideModeEnabled={hideShowMode}
-				toggleShowHideMode={toggleShowHideMode} />
+				toggleShowHideMode={toggleShowHideMode}
+				preferences={preferences}
+				setPreferences={setPreferences} />
 			<Container>
 				<UpgradeAlert todos={todos} upgradeList={upgradeList} />
 				<Container>
@@ -141,6 +148,7 @@ export function Main() {
 								reset={reset}
 								canReset={dailiesCanReset}
 								hideShowModeEnabled={hideShowMode}
+								preferences={preferences}
 							/>
 						</Col>
 						<Col sm={12} md={6} className='todoList'>
@@ -153,6 +161,7 @@ export function Main() {
 								reset={reset}
 								canReset={weekliesCanReset}
 								hideShowModeEnabled={hideShowMode}
+								preferences={preferences}
 							/>
 						</Col>
 					</Row>

@@ -1,73 +1,93 @@
 export const List = {
-	version: 2,
+	version: 3,
 	dailies: [
 		{
 			name: "Grand Company Supply",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Grand_Company#Missions",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Grand_Company#Missions" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Supply_and_Provisioning_Mission" }
+			],
 			tags: ["DoH"],
 			isCompleted: false
 		},
 		{
 			name: "Grand Company Provisions",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Grand_Company#Missions",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Grand_Company#Missions" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Supply_and_Provisioning_Mission" }
+			],
 			tags: ["DoL"],
 			isCompleted: false
 		},
 		{
 			name: "Daily Hunts",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/The_Hunt",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/The_Hunt" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Hunt" }
+			],
 			tags: ["DoW", "DoM"],
 			isCompleted: false
 		},
 		{
 			name: "Duty Roulettes",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Duty_Roulette",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Duty_Roulette" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Duty_Roulette" }
+			],
 			tags: ["DoW", "DoM"],
 			isCompleted: false
 		},
 		{
 			name: "Beast Tribe Quests",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Beast_Tribe_Quests",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Beast_Tribe_Quests" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Beast_Tribe_Quest" }
+			],
 			tags: ["DoW", "DoM", "DoH", "DoL"],
 			isCompleted: false
 		},
 		{
 			name: "Retainer Ventures",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Retainer_Ventures",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Retainer_Ventures" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Retainer_Ventures" }
+			],
 			tags: ["Other"],
 			isCompleted: false
 		},
 		{
 			name: "Gardening",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Gardening",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Gardening" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Gardening" }
+			],
 			tags: ["Other"],
 			isCompleted: false
 		},
 		{
 			name: "Acquire Treasure Hunt Map",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Treasure_Hunt",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Treasure_Hunt" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Treasure_Hunt" }
+			],
 			tags: ["DoW", "DoM"],
 			isCompleted: false
 		},
 		{
 			name: "Mini Cactpot",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Cactpot#Mini_Cactpot",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Cactpot#Mini_Cactpot" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Cactpot" }
+			],
 			tags: ["Gold Saucer"],
 			isCompleted: false
 		},
 		{
 			name: "Squadron Missions",
-			type: "daily",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Adventurer_Squadrons",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Adventurer_Squadrons" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Squadron_Mission" }
+			],
 			tags: ["Other"],
 			isCompleted: false
 		},
@@ -75,71 +95,91 @@ export const List = {
 	weeklies: [
 		{
 			name: "Weekly Hunts",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/The_Hunt",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/The_Hunt" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Hunt" },
+			],
 			tags: ["DoW", "DoM"],
 			isCompleted: false
 		},
 		{
 			name: "Challenge Log",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Challenge_Log",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Challenge_Log" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Challenge_Log" }
+			],
 			tags: ["DoW", "DoM", "DoH", "DoL", "Gold Saucer"],
 			isCompleted: false
 		},
 		{
 			name: "Wondrous Tails",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Wondrous_Tails",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Wondrous_Tails" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Wondrous_Tails" }
+			],
 			tags: ["DoW", "DoM"],
 			isCompleted: false
 		},
 		{
 			name: "Custom Deliveries",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Custom_Deliveries",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Custom_Deliveries" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Custom_Delivery" }
+			],
 			tags: ["DoH", "DoL"],
 			isCompleted: false
 		},
 		{
 			name: "Priority Squadron Mission",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Adventurer_Squadrons",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Adventurer_Squadrons" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Squadron_Mission" }
+			],
 			tags: ["Other"],
 			isCompleted: false
 		},
 		{
 			name: "Doman Enclave Donations",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Doman_Enclave_Reconstruction",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Doman_Enclave_Reconstruction" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Doman_Reconstruction" }
+			],
 			tags: ["Other"],
 			isCompleted: false
 		},
 		{
 			name: "Fashion Report",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Fashion_Report",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Fashion_Report" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/The_Fashion_Report" }
+			],
 			tags: ["Gold Saucer"],
 			isCompleted: false
 		},
 		{
 			name: "Jumbo Cactpot",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Cactpot#Jumbo_Cactpot",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Cactpot#Jumbo_Cactpot" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Cactpot" }
+			],
 			tags: ["Gold Saucer"],
 			isCompleted: false
 		},
 		{
 			name: "Savage Reclears",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Raids",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Raids" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Raid" }
+			],
 			tags: ["DoW", "DoM"],
 			isCompleted: false
 		},
 		{
 			name: "Newest Alliance Raid",
-			type: "weekly",
-			link: "https://ffxiv.consolegameswiki.com/wiki/Raids",
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Raids" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Category:Raid" }
+			],
 			tags: ["DoW", "DoM"],
 			isCompleted: false
 		},

@@ -11,6 +11,17 @@ p {
 	padding-top: 3em;
 }
 
+p.todoLink {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+img.linkLogo {
+	width: 1em;
+	height: 1em;
+}
+
 /** Nav, Consent, and Footer */
 .consent-alert {
 	position: fixed;
