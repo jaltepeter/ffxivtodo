@@ -2,7 +2,8 @@
 import React from 'react';
 
 /** app imports */
-import { List } from './data/items';
+import { List } from '../data/items';
+import { StorageKey } from '../enums';
 
 function getDefaultList() {
 	var list = List;
@@ -15,7 +16,7 @@ function getDefaultList() {
 
 export const UseStateWithLocalStorage = localStorageKey => {
 	const [value, setValue] = React.useState(
-		JSON.parse(localStorage.getItem(localStorageKey)) || (localStorageKey === 'ffxivtodos' ? getDefaultList() : {}));
+		JSON.parse(localStorage.getItem(localStorageKey)) || (localStorageKey === StorageKey.List ? getDefaultList() : {}));
 
 	React.useEffect(() => {
 		localStorage.setItem(localStorageKey, JSON.stringify(value));

@@ -18,6 +18,7 @@ export function ChangeLog({ isModalOpen, hideModal }) {
 				<h3>v0.6.0</h3>
 				<ul>
 					<li>Added links for GamerEscape wiki</li>
+					<li>Added notification icon for new version releases</li>
 					<li>Added new preferences window
 						<ul>
 							<li>Added ability to hide specific link sources</li>

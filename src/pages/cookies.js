@@ -2,7 +2,7 @@
 import { Container } from "react-bootstrap"
 
 /** app imports */
-import { NavBar } from './layout/navBar';
+import { NavBar } from '../layout/navBar';
 
 export function Cookies() {
 	return (

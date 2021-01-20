@@ -6,23 +6,24 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
+import { StorageKey } from '../enums';
+
 export function PreferencesDialog({ isModalOpen, hideModal }) {
 
-	const [prefs, setPrefs] = React.useState(JSON.parse(localStorage.getItem('preferences')) || {});
+	const [prefs, setPrefs] = React.useState(JSON.parse(localStorage.getItem(StorageKey.Prefs)) || {});
 
 	const togglePref = (prefKey) => {
 		prefs[prefKey] = !prefs[prefKey];
 		setPrefs(prefs);
-		console.log(prefs);
 	}
 
 	const cancelChanges = () => {
-		setPrefs(JSON.parse(localStorage.getItem('preferences')) || {});
+		setPrefs(JSON.parse(localStorage.getItem(StorageKey.Prefs)) || {});
 		hideModal();
 	}
 
 	const saveChanges = () => {
-		localStorage.setItem('preferences', JSON.stringify(prefs));
+		localStorage.setItem(StorageKey.Prefs, JSON.stringify(prefs));
 		hideModal();
 		window.location.reload();
 	}
@@ -52,7 +53,7 @@ export function PreferencesDialog({ isModalOpen, hideModal }) {
 					</Form.Group>
 					<Form.Group controlId='hideGELinks'>
 						<Form.Check
-							defaultChecked={prefs.hideCGWLinks}
+							defaultChecked={prefs.hideGELinks}
 							type='checkbox'
 							label='Hide Gamer Escape Links'
 							onChange={() => togglePref('hideGELinks')} />

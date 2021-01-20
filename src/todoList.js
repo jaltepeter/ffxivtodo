@@ -32,7 +32,7 @@ function weeklyResetCountdown() {
 	return resetTime.diffNow(['hours', 'minutes']);
 };
 
-export function TodoList({ title, todos, completePercent, completeTodo, hideTodo, reset, canReset, hideShowModeEnabled, preferences }) {
+export function TodoList({ title, todos, completePercent, completeTodo, hideTodo, reset, canReset, hideShowModeEnabled, prefs }) {
 	const [isResetModalOpen, setResetModalOpen] = React.useState(false);
 	const [dailyresetTime, setDailyResetTime] = React.useState(title === 'dailies' ? dailyResetCountdown : weeklyResetCountdown);
 
@@ -76,7 +76,7 @@ export function TodoList({ title, todos, completePercent, completeTodo, hideTodo
 						completeTodo={completeTodo}
 						hideTodo={hideTodo}
 						hideShowModeEnabled={hideShowModeEnabled}
-						preferences={preferences}
+						prefs={prefs}
 					/>
 				))}
 			</ListGroup>

@@ -8,20 +8,19 @@ import Row from 'react-bootstrap/Row';
 
 /** app imports */
 import { TodoList } from './todoList';
-import { UseStateWithLocalStorage } from './localStorage';
+import { UseStateWithLocalStorage } from './helpers/localStorage';
 import { List } from './data/items';
 import { NavBar } from './layout/navBar';
 import { UpgradeAlert } from './upgradeAlert';
 import { ConsentAlert } from './consentAlert';
+import { StorageKey } from './enums';
 
 export function Main() {
-	const [todos, setTodos] = UseStateWithLocalStorage('ffxivtodos');
-	const [preferences, setPreferences] = UseStateWithLocalStorage('preferences');
+	const [todos, setTodos] = UseStateWithLocalStorage(StorageKey.List);
+	const [prefs] = UseStateWithLocalStorage(StorageKey.Prefs);
 	const [dailiesCanReset, setDailiesCanReset] = React.useState(todos.dailies.filter(t => t.isCompleted === true).length > 0);
 	const [weekliesCanReset, setWeekliesCanReset] = React.useState(todos.weeklies.filter(t => t.isCompleted === true).length > 0);
 	const [hideShowMode, setHideShowMode] = React.useState(false);
-
-
 
 	/**
 	 * Marks a TodoItem as complete
@@ -48,7 +47,6 @@ export function Main() {
 	 * Toggles Show/Hide mode so that users can hide or show specific list items
 	 */
 	const toggleShowHideMode = () => {
-		console.log('toggling');
 		setHideShowMode(!hideShowMode);
 	}
 
@@ -132,8 +130,7 @@ export function Main() {
 			<NavBar
 				showHideModeEnabled={hideShowMode}
 				toggleShowHideMode={toggleShowHideMode}
-				preferences={preferences}
-				setPreferences={setPreferences} />
+				prefs={prefs} />
 			<Container>
 				<UpgradeAlert todos={todos} upgradeList={upgradeList} />
 				<Container>
@@ -148,7 +145,7 @@ export function Main() {
 								reset={reset}
 								canReset={dailiesCanReset}
 								hideShowModeEnabled={hideShowMode}
-								preferences={preferences}
+								prefs={prefs}
 							/>
 						</Col>
 						<Col sm={12} md={6} className='todoList'>
@@ -161,7 +158,7 @@ export function Main() {
 								reset={reset}
 								canReset={weekliesCanReset}
 								hideShowModeEnabled={hideShowMode}
-								preferences={preferences}
+								prefs={prefs}
 							/>
 						</Col>
 					</Row>

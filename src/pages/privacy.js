@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap"
-import { NavBar } from "./layout/navBar";
+import { NavBar } from "../layout/navBar";
 
 export function Privacy() {
 	return (

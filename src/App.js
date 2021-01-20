@@ -8,8 +8,8 @@ import './css/App.css';
 
 /** components */
 import { Main } from './main';
-import { Privacy } from './privacy';
-import { Cookies } from './cookies';
+import { Privacy } from './pages/privacy';
+import { Cookies } from './pages/cookies';
 import { Footer } from './layout/footer';
 
 export function App() {

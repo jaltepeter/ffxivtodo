@@ -21,12 +21,14 @@ import geLogo from './img/ge.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash, faLink } from '@fortawesome/free-solid-svg-icons';
 
+import { LinkSource } from './enums'
+
 function tagToClass(tag) {
 	return tag.toLowerCase().replace(/\s/g, '');
 }
 
-export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabled, preferences }) {
-	const [open, setOpen] = React.useState(preferences.alwaysShowInfo);
+export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabled, prefs }) {
+	const [open, setOpen] = React.useState(prefs.alwaysShowInfo);
 
 	let completeButton =
 		<Image
@@ -41,10 +43,10 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 		if (source !== 'other') {
 			var logo;
 			switch (source) {
-				case 'cgw':
+				case LinkSource.ConsoleGaming:
 					logo = cgwLogo;
 					break;
-				case 'ge':
+				case LinkSource.GamerEscape:
 					logo = geLogo;
 					break;
 				default:
@@ -58,8 +60,8 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 
 	function ExternalLink({ source, url }) {
 
-		if ((source === 'cgw' && !preferences.hideCGWLinks)
-			|| (source === 'ge' && !preferences.hideGELinks)) {
+		if ((source === LinkSource.ConsoleGaming && !prefs.hideCGWLinks)
+			|| (source === LinkSource.GamerEscape && !prefs.hideGELinks)) {
 			return (
 				<p className="todoLink"><LinkLogo source={source} /> <a href={url} target="blank">{url}</a></p>
 			);
@@ -95,7 +97,7 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 				{hideShowModeEnabled === false
 					? <Col xs={3} md={3} style={{ textAlign: 'right' }}>
 						{completeButton}<br />
-						{preferences.alwaysShowInfo !== true &&
+						{prefs.alwaysShowInfo !== true &&
 							<Image
 								src={infoIcon}
 								style={{ cursor: 'help', marginTop: '3px' }}
