@@ -16,6 +16,7 @@ import updateIcon from '../img/updateIcon.png';
 /** components */
 import { ChangeLog } from '../dialogs/changelogDialog';
 import { PreferencesDialog } from '../dialogs/preferencesDialog';
+import { CustomItemDialog } from '../dialogs/customItemDialog';
 import { NavDropdown } from 'react-bootstrap';
 
 import { StorageKey } from '../enums';
@@ -25,6 +26,7 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 
 	const [isChangeLogModalOpen, setChangeLogModalOpen] = React.useState(false);
 	const [isPrefsModalOpen, setPrefsModalOpen] = React.useState(false);
+	const [isCustomItemOpen, setCustomItemOpen] = React.useState(false);
 
 	const showChangeLog = () => {
 		prefs.lastVersion = app_version;
@@ -37,6 +39,10 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 	const showPrefs = () => { setPrefsModalOpen(true); }
 
 	const hidePrefs = () => { setPrefsModalOpen(false); }
+
+	const showCustomItems = () => { setCustomItemOpen(true); }
+
+	const hideCustomItems = () => { setCustomItemOpen(false); }
 
 	const UpdateBadge = () => {
 		if (compareVersions.compare(app_version, prefs.lastVersion || '0.0.0', '>')) {
@@ -63,6 +69,7 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 					<Nav >
 						<NavDropdown title='Options' alignRight id='nav-options-dropdown'>
 							<NavDropdown.Item onClick={showPrefs}>Preferences</NavDropdown.Item>
+							<NavDropdown.Item onClick={showCustomItems}>Custom Items</NavDropdown.Item>
 							<NavDropdown.Divider />
 							<NavDropdown.Item onClick={toggleShowHideMode}>
 								{showHideModeEnabled ? 'Exit' : 'Enable'} Show/Hide Mode
@@ -77,6 +84,9 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 			<PreferencesDialog
 				isModalOpen={isPrefsModalOpen}
 				hideModal={hidePrefs} />
+			<CustomItemDialog
+				isModalOpen={isCustomItemOpen}
+				hideModal={hideCustomItems} />
 		</div>
 	);
 

@@ -15,8 +15,21 @@ function getDefaultList() {
 }
 
 export const UseStateWithLocalStorage = localStorageKey => {
+	var res = null;
+	switch (localStorageKey) {
+		case StorageKey.List:
+			res = getDefaultList();
+			break;
+		case StorageKey.Custom:
+			res = { dailies: [], weeklies: [] };
+			break;
+		default:
+			res = {};
+			break;
+	}
+
 	const [value, setValue] = React.useState(
-		JSON.parse(localStorage.getItem(localStorageKey)) || (localStorageKey === StorageKey.List ? getDefaultList() : {}));
+		JSON.parse(localStorage.getItem(localStorageKey)) || res);
 
 	React.useEffect(() => {
 		localStorage.setItem(localStorageKey, JSON.stringify(value));

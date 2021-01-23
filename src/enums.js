@@ -1,6 +1,7 @@
 export const StorageKey = {
 	List: 'ffxivtodos',
-	Prefs: 'preferences'
+	Prefs: 'preferences',
+	Custom: 'custom-items'
 }
 
 export const LinkSource = {
