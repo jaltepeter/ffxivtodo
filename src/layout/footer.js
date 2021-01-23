@@ -12,6 +12,11 @@ export function Footer() {
 			<div className="container">
 				<a href='https://github.com/Brunhine/ffxivtodo'><FontAwesomeIcon icon={faGithub} /> GitHub</a> | <a href='/privacy'>Privacy Policy</a> | <a href='/cookies'>Cookie Policy</a>
 			</div>
+			<hr />
+			<div className="container" >
+				FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd. FINAL FANTASY XIV © 2010 - 2021 SQUARE ENIX CO., LTD. All Rights Reserved.
+			</div>
+
 		</footer>
 	);
 }
