@@ -23,7 +23,6 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 
 	const [validated, setValidated] = useState(false);
 
-
 	const { value: name, bind: bindName, reset: resetName } = useInput('');
 	const { value: type, bind: bindType, reset: resetType } = useInput('dailies');
 
@@ -55,8 +54,12 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 		setItems({ dailies: type === 'dailies' ? newItems : items.dailies, weeklies: type === 'weeklies' ? newItems : items.weeklies });
 	};
 
+	const saveChanges = () => {
+		window.location.reload();
+	}
+
 	return (
-		<Modal show={isModalOpen} onHide={hideModal} animation={true}>
+		<Modal show={isModalOpen} onHide={hideModal} animation={true} backdrop='static'>
 			<Modal.Header closeButton>
 				<Modal.Title>Custom Items</Modal.Title>
 			</Modal.Header>
@@ -111,7 +114,7 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 				</ListGroup>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button variant="primary" onClick={hideModal}>Done</Button>
+				<Button variant="primary" onClick={saveChanges}>Save Changes and Reload</Button>
 			</Modal.Footer>
 		</Modal>
 

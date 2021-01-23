@@ -14,6 +14,7 @@ import { NavBar } from './layout/navBar';
 import { UpgradeAlert } from './upgradeAlert';
 import { ConsentAlert } from './consentAlert';
 import { StorageKey } from './enums';
+import { listSort } from './helpers/listSort';
 
 export function Main() {
 	const [todos, setTodos] = UseStateWithLocalStorage(StorageKey.List);
@@ -31,7 +32,7 @@ export function Main() {
 		const version = todos.version;
 		const newTodos = [...todos[type]];
 		newTodos.find(t => t.name === name).isCompleted = !newTodos.find(t => t.name === name).isCompleted;
-		newTodos.sort((a, b) => a.isCompleted - b.isCompleted || a.name.localeCompare(b.name));
+		listSort(newTodos);
 		todos[type] = newTodos;
 
 		if (type === 'dailies') {
