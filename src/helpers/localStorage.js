@@ -49,7 +49,7 @@ export const UseStateWithLocalStorage = localStorageKey => {
 			res = JSON.parse(localStorage.getItem(StorageKey.Custom)) || { dailies: [], weeklies: [] };
 			break;
 		case StorageKey.Prefs:
-			res = JSON.parse(localStorage.getItem(StorageKey.Prefs));
+			res = JSON.parse(localStorage.getItem(StorageKey.Prefs)) || { lastVersion: '0.0.0' };
 			break;
 		default:
 			res = {};

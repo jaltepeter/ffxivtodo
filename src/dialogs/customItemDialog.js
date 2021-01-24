@@ -35,7 +35,6 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 			setValidated(true);
 		} else {
 			evt.preventDefault();
-			console.log(`Creating item: ${name} - ${type}`);
 			createItem();
 			resetName();
 			resetType();
@@ -64,7 +63,7 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 	return (
 		<Modal show={isModalOpen} onHide={hideModal} animation={true} backdrop='static'>
 			<Modal.Header closeButton>
-				<Modal.Title>Custom Items</Modal.Title>
+				<Modal.Title>Manage Custom Items</Modal.Title>
 			</Modal.Header>
 			<Modal.Body className=''>
 				<h5>New Item</h5>
@@ -99,6 +98,9 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 								<option>Gold Saucer</option>
 								<option>Other</option>
 							</Form.Control>
+							<Form.Text className="text-muted">
+								Hold <code>CTRL</code> or <code>CMD</code> to select more than one tag.
+    					</Form.Text>
 						</Col>
 					</Form.Group>
 					<Button variant='primary' type='submit'>Save</Button>
