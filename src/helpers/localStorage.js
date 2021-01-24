@@ -33,7 +33,8 @@ function mergeSubList(baseList, customList, type) {
 		});
 	}
 
-	baseList[type] = baseList[type].filter(f => !f.id || customList[type].filter(j => j.id === f.id).length > 0);
+	if (customList)
+		baseList[type] = baseList[type].filter(f => !f.id || customList[type].filter(j => j.id === f.id).length > 0);
 
 	listSort(baseList[type]);
 }

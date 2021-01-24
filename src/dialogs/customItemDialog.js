@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import { StorageKey } from '../enums';
 import { UseStateWithLocalStorage } from '../helpers/localStorage';
-import { useInput } from '../helpers/useInput';
+import { useInput, useMultiSelect } from '../helpers/useInput';
 
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -25,6 +25,7 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 
 	const { value: name, bind: bindName, reset: resetName } = useInput('');
 	const { value: type, bind: bindType, reset: resetType } = useInput('dailies');
+	const { value: tags, bind: bindTags, reset: resetTags } = useMultiSelect([]);
 
 	const handleSubmit = (evt) => {
 		const form = evt.currentTarget;
@@ -35,16 +36,18 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 		} else {
 			evt.preventDefault();
 			console.log(`Creating item: ${name} - ${type}`);
-			createItem(name, type);
+			createItem();
 			resetName();
 			resetType();
+			resetTags();
 			setValidated(false);
 		}
 	}
 
-	const createItem = (name, type) => {
+	const createItem = () => {
 		var newItems = [...items[type]];
-		newItems.push({ id: uuidv4(), name: name });
+		tags.push('Custom');
+		newItems.push({ id: uuidv4(), name: name, tags: tags });
 		setItems({ dailies: type === 'dailies' ? newItems : items.dailies, weeklies: type === 'weeklies' ? newItems : items.weeklies });
 	};
 
@@ -85,33 +88,51 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 							</Form.Control>
 						</Col>
 					</Form.Group>
+					<Form.Group as={Row} controlId='tags'>
+						<Form.Label column sm='2'>Tags:</Form.Label>
+						<Col sm='10'>
+							<Form.Control as='select' multiple {...bindTags}>
+								<option value='DoW'>DoW</option>
+								<option>DoM</option>
+								<option>DoH</option>
+								<option>DoL</option>
+								<option>Gold Saucer</option>
+								<option>Other</option>
+							</Form.Control>
+						</Col>
+					</Form.Group>
 					<Button variant='primary' type='submit'>Save</Button>
 				</Form>
 				<hr />
 				<h5>Dailies</h5>
-				<ListGroup className='clearfix'>
-					{items.dailies.map(item => (
-						<ListGroup.Item
-							key={item.id}
-							className='d-flex justify-content-between'>{item.name}
-							<FontAwesomeIcon icon={faTrash}
-								onClick={() => deleteItem(item.id, 'dailies')} />
-						</ListGroup.Item>
+				{items.dailies.length > 0
+					? <ListGroup className='clearfix'>
+						{items.dailies.map(item => (
+							<ListGroup.Item
+								key={item.id}
+								className='d-flex justify-content-between'>{item.name}
+								<FontAwesomeIcon icon={faTrash}
+									onClick={() => deleteItem(item.id, 'dailies')} />
+							</ListGroup.Item>
+						))}
+					</ListGroup>
+					: <p>None yet</p>}
 
-					))}
-				</ListGroup>
 				<h5>Weeklies</h5>
-				<ListGroup className='clearfix'>
-					{items.weeklies.map(item => (
-						<ListGroup.Item
-							key={item.id}
-							className='d-flex justify-content-between'>{item.name}
-							<FontAwesomeIcon icon={faTrash}
-								onClick={() => deleteItem(item.id, 'weeklies')} />
-						</ListGroup.Item>
 
-					))}
-				</ListGroup>
+				{items.weeklies.length > 0
+					? <ListGroup className='clearfix'>
+						{items.weeklies.map(item => (
+							<ListGroup.Item
+								key={item.id}
+								className='d-flex justify-content-between'>{item.name}
+								<FontAwesomeIcon icon={faTrash}
+									onClick={() => deleteItem(item.id, 'weeklies')} />
+							</ListGroup.Item>
+
+						))}
+					</ListGroup>
+					: <p>None yet</p>}
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="primary" onClick={saveChanges}>Save Changes and Reload</Button>
