@@ -15,6 +15,7 @@ import { UpgradeAlert } from './upgradeAlert';
 import { ConsentAlert } from './consentAlert';
 import { StorageKey } from './enums';
 import { listSort } from './helpers/listSort';
+import { mergeLists } from './helpers/localStorage';
 
 export function Main() {
 	const [todos, setTodos] = UseStateWithLocalStorage(StorageKey.List);
@@ -97,27 +98,24 @@ export function Main() {
 	 * in the event that the list was changed.
 	 */
 	const upgradeList = () => {
-		let newTodos = List;
+		let newTodos = mergeLists(List, JSON.parse(localStorage.getItem(StorageKey.Custom)));
 
-		newTodos.dailies.forEach((i) => {
-			var curr = todos.dailies.find(obj => obj.name === i.name);
-			if (curr) {
-				i.isCompleted = curr.isCompleted;
-			}
+		['dailies', 'weeklies'].forEach(type => {
+			newTodos[type].forEach((i) => {
+				var curr = todos[type].find(obj => obj.name === i.name);
+				if (curr) {
+					i.isCompleted = curr.isCompleted;
+				}
+			});
+			newTodos[type] = List[type].sort((a, b) => a.isCompleted - b.isCompleted || a.name.localeCompare(b.name));
 		});
-		newTodos.dailies = List.dailies.sort((a, b) => a.isCompleted - b.isCompleted || a.name.localeCompare(b.name));
+
 		setDailiesCanReset(newTodos.dailies.filter(t => t.isCompleted === true).length > 0);
-
-		newTodos.weeklies.forEach((i) => {
-			var curr = todos.weeklies.find(obj => obj.name === i.name);
-			if (curr) {
-				i.isCompleted = curr.isCompleted;
-			}
-		});
-		newTodos.weeklies = List.weeklies.sort((a, b) => a.isCompleted - b.isCompleted || a.name.localeCompare(b.name));
 		setWeekliesCanReset(newTodos.weeklies.filter(t => t.isCompleted === true).length > 0);
 
 		setTodos(newTodos);
+
+		window.location.reload();
 	}
 
 	window.upgradeList = upgradeList;

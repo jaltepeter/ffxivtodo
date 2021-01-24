@@ -15,6 +15,16 @@ export function ChangeLog({ isModalOpen, hideModal }) {
 				<p><strong>Thank you for helping to test this beta version!</strong></p>
 				<p>Please report any issues or suggestions on the <a href='https://github.com/Brunhine/ffxivtodo/issues' target='blank'>GitHub issue Tracker</a></p>
 				<hr />
+				<h3>v0.7.0</h3>
+				<ul>
+					<li>New feature: Custom Items
+					<ul>
+							<li>Add or remove your own custom items to each list</li>
+							<li>Found in the 'Options' menu</li>
+						</ul>
+					</li>
+				</ul>
+				<hr />
 				<h3>v0.6.0</h3>
 				<ul>
 					<li>Added links for GamerEscape wiki</li>

@@ -15,7 +15,7 @@ function getDefaultList() {
 	return list;
 }
 
-function mergeLists(baseList, customList) {
+export function mergeLists(baseList, customList) {
 
 	mergeSubList(baseList, customList, 'dailies');
 	mergeSubList(baseList, customList, 'weeklies');

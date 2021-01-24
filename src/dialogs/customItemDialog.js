@@ -119,7 +119,6 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 					: <p>None yet</p>}
 
 				<h5>Weeklies</h5>
-
 				{items.weeklies.length > 0
 					? <ListGroup className='clearfix'>
 						{items.weeklies.map(item => (
@@ -129,7 +128,6 @@ export function CustomItemDialog({ isModalOpen, hideModal }) {
 								<FontAwesomeIcon icon={faTrash}
 									onClick={() => deleteItem(item.id, 'weeklies')} />
 							</ListGroup.Item>
-
 						))}
 					</ListGroup>
 					: <p>None yet</p>}

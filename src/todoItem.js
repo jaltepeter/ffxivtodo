@@ -97,7 +97,7 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 				{hideShowModeEnabled === false
 					? <Col xs={3} md={3} style={{ textAlign: 'right' }}>
 						{completeButton}<br />
-						{prefs.alwaysShowInfo !== true &&
+						{(todo.links && prefs.alwaysShowInfo !== true) &&
 							<Image
 								src={infoIcon}
 								style={{ cursor: 'help', marginTop: '3px' }}
@@ -113,7 +113,7 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 			</Row>
 			<Collapse in={open}>
 				<div id="example-collapse-text" style={{ overflowWrap: 'anywhere' }}>
-					<h5>Links</h5>
+					{todo.links && <h5>Links</h5>}
 					{todo.links && todo.links.map((link, index) => (
 						<ExternalLink
 							source={link.source}
