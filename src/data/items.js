@@ -186,8 +186,8 @@ export const List = {
 		{
 			name: "Faux Hollows (Unreal Trials)",
 			links:[
-				{ source:: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Faux_Hollows"},
-				{ source:: "ge", url: "https://ffxiv.gamerescape.com/wiki/Faux_Hollows"}
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Faux_Hollows"},
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Faux_Hollows"}
 			],
 			tags: ["DoW"],
 			isCompleted: false
