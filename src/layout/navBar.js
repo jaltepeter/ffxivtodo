@@ -17,16 +17,18 @@ import updateIcon from '../img/updateIcon.png';
 import { ChangeLog } from '../dialogs/changelogDialog';
 import { PreferencesDialog } from '../dialogs/preferencesDialog';
 import { CustomItemDialog } from '../dialogs/customItemDialog';
+import { ResetToDefaultsDialog } from '../dialogs/resetDefaultsDialog';
 import { NavDropdown } from 'react-bootstrap';
 
 import { StorageKey } from '../enums';
 import { version as app_version } from '../../package.json';
 
-export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
+export function NavBar({ showHideModeEnabled, toggleShowHideMode, resetDefaults, prefs }) {
 
 	const [isChangeLogModalOpen, setChangeLogModalOpen] = React.useState(false);
 	const [isPrefsModalOpen, setPrefsModalOpen] = React.useState(false);
 	const [isCustomItemOpen, setCustomItemOpen] = React.useState(false);
+	const [isResetDefaultsOpen, setResetDefaultsOpen] = React.useState(false);
 
 	const showChangeLog = () => {
 		prefs.lastVersion = app_version;
@@ -37,12 +39,13 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 	const hideChangeLog = () => { setChangeLogModalOpen(false); }
 
 	const showPrefs = () => { setPrefsModalOpen(true); }
-
 	const hidePrefs = () => { setPrefsModalOpen(false); }
 
 	const showCustomItems = () => { setCustomItemOpen(true); }
-
 	const hideCustomItems = () => { setCustomItemOpen(false); }
+
+	const showResetDefaults = () => { setResetDefaultsOpen(true); }
+	const hideResetDefaults = () => { setResetDefaultsOpen(false); }
 
 	const UpdateBadge = () => {
 		if (compareVersions.compare(app_version, prefs.lastVersion || '0.0.0', '>')) {
@@ -74,6 +77,8 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 							<NavDropdown.Item onClick={toggleShowHideMode}>
 								{showHideModeEnabled ? 'Exit' : 'Enable'} Show/Hide Mode
 							</NavDropdown.Item>
+							<NavDropdown.Divider />
+							<NavDropdown.Item onClick={showResetDefaults}>Restore Defaults</NavDropdown.Item>
 						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
@@ -87,6 +92,10 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 			<CustomItemDialog
 				isModalOpen={isCustomItemOpen}
 				hideModal={hideCustomItems} />
+			<ResetToDefaultsDialog
+				isModalOpen={isResetDefaultsOpen}
+				hideModal={hideResetDefaults}
+				reset={resetDefaults} />
 		</div>
 	);
 

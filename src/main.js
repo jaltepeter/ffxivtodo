@@ -77,7 +77,7 @@ export function Main() {
 	 * Resets progress on the specified list by marking all items as incomplete
 	 * @param {string} type The type of TodoItem ("daily or "weekly)
 	 */
-	const reset = type => {
+	const resetProgress = type => {
 		const version = todos.version;
 		const newTodos = [...todos[type]];
 		newTodos.forEach(element => {
@@ -92,6 +92,16 @@ export function Main() {
 			setTodos({ 'version': version, 'dailies': todos.dailies, 'weeklies': newTodos });
 		}
 	}
+
+	/**
+	 * Resets all of the lists to the default base list
+	 * Clears all local storage and reloads the window
+	 */
+	const resetToDefaults = () => {
+		console.info('Resetting all lists to default state.');
+		localStorage.clear();
+		window.location.reload();
+	};
 
 	/**
 	 * Provides functionality to upgrade the list in the user's localstorage to a new version 
@@ -129,6 +139,7 @@ export function Main() {
 			<NavBar
 				showHideModeEnabled={hideShowMode}
 				toggleShowHideMode={toggleShowHideMode}
+				resetDefaults={resetToDefaults}
 				prefs={prefs} />
 			<Container>
 				<UpgradeAlert todos={todos} upgradeList={upgradeList} />
@@ -141,7 +152,7 @@ export function Main() {
 								completePercent={dailyComplete}
 								completeTodo={completeTodo}
 								hideTodo={hideTodo}
-								reset={reset}
+								reset={resetProgress}
 								canReset={dailiesCanReset}
 								hideShowModeEnabled={hideShowMode}
 								prefs={prefs}
@@ -154,7 +165,7 @@ export function Main() {
 								completePercent={weeklyComplete}
 								completeTodo={completeTodo}
 								hideTodo={hideTodo}
-								reset={reset}
+								reset={resetProgress}
 								canReset={weekliesCanReset}
 								hideShowModeEnabled={hideShowMode}
 								prefs={prefs}
