@@ -102,7 +102,7 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 								src={infoIcon}
 								style={{ cursor: 'help', marginTop: '3px' }}
 								onClick={() => setOpen(!open)}
-								aria-controls="example-collapse-text"
+								aria-controls="moreInfo-collapse-text"
 								aria-expanded={open}
 								title='click to show more info'
 							/>
@@ -112,7 +112,8 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 				}
 			</Row>
 			<Collapse in={open}>
-				<div id="example-collapse-text" style={{ overflowWrap: 'anywhere' }}>
+				<div id="moreInfo-collapse-text" style={{ overflowWrap: 'anywhere' }}>
+					<h5>Notes</h5>
 					{todo.links && <h5>Links</h5>}
 					{todo.links && todo.links.map((link, index) => (
 						<ExternalLink
@@ -122,6 +123,7 @@ export function TodoItem({ todo, type, completeTodo, hideTodo, hideShowModeEnabl
 						/>
 					))}
 				</div>
+
 			</Collapse>
 		</ListGroup.Item>
 	);
