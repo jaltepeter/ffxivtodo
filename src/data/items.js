@@ -1,5 +1,5 @@
 export const List = {
-	version: 3,
+	version: 4,
 	dailies: [
 		{
 			id: "5e56dd4e-2dc3-49fa-a194-25a85d8c7e64",
@@ -12,7 +12,7 @@ export const List = {
 			isCompleted: false
 		},
 		{
-			id:"6e022584-c0c3-4d36-a3de-7b4d0bd7c554",
+			id: "6e022584-c0c3-4d36-a3de-7b4d0bd7c554",
 			name: "Grand Company Provisions",
 			links: [
 				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Grand_Company#Missions" },
@@ -206,9 +206,9 @@ export const List = {
 		{
 			id: "094bd120-c7a9-4890-a7ab-57b8f163bd87",
 			name: "Faux Hollows (Unreal Trials)",
-			links:[
-				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Faux_Hollows"},
-				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Faux_Hollows"}
+			links: [
+				{ source: "cgw", url: "https://ffxiv.consolegameswiki.com/wiki/Faux_Hollows" },
+				{ source: "ge", url: "https://ffxiv.gamerescape.com/wiki/Faux_Hollows" }
 			],
 			tags: ["DoW"],
 			isCompleted: false

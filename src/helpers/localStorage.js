@@ -24,17 +24,21 @@ export function mergeLists(baseList, customList) {
 }
 
 function mergeSubList(baseList, customList, type) {
+	// If there are custom items
 	if (customList && customList[type].length > 0) {
 		const list = [...customList[type]];
+		// check each custom item. if it is not in the list, add it.
 		list.forEach(item => {
 			if (baseList[type].filter(i => i.id === item.id).length === 0) {
+				item.isCustom = true;
 				baseList[type].push(item);
 			}
 		});
 	}
 
+	// remove all custom items that are no longer in the custom list
 	if (customList)
-		baseList[type] = baseList[type].filter(f => !f.id || customList[type].filter(j => j.id === f.id).length > 0);
+		baseList[type] = baseList[type].filter(f => !f.isCustom || customList[type].filter(j => j.id === f.id).length > 0);
 
 	listSort(baseList[type]);
 }
