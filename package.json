@@ -12,7 +12,7 @@
 		"@testing-library/user-event": "^12.7.1",
 		"bootstrap": "^4.6.0",
 		"compare-versions": "^3.6.0",
-		"luxon": "^1.25.0",
+		"luxon": "^1.26.0",
 		"react": "^17.0.1",
 		"react-bootstrap": "^1.4.3",
 		"react-cookie-consent": "^6.2.2",
