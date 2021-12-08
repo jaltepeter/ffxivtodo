@@ -9864,10 +9864,10 @@ react-bootstrap@^2.0.3:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
-react-cookie-consent@^6.4.1:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/react-cookie-consent/-/react-cookie-consent-6.4.1.tgz#256916725d87d8227e1f71d6aa4a18d451dc0d40"
-  integrity sha512-dAgC2uSrUN0eXoNhEKDCHH/dL3RUs/84SPO8hRvJVz7HtPGmF+t/mQwd4V4qsGAvVqhbn0hzMdftEuiJS3iueQ==
+react-cookie-consent@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/react-cookie-consent/-/react-cookie-consent-7.0.0.tgz#2e68bbbb676383710261db8a54e45a57eec55306"
+  integrity sha512-q55Kjxp8PwSnLmYpQbgFZ7OIdzkWLQglMLV6hV0SVf0sAeWlvYdmIpa/5faTdpia0URYlBOMyjvEaGAFR6nJPQ==
   dependencies:
     js-cookie "^2.2.1"
     prop-types "^15.7.2"
