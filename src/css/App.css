@@ -7,6 +7,7 @@ p {
 	margin-bottom: 0.5em;
 }
 
+
 .policyContainer {
 	padding-top: 3em;
 }
@@ -78,31 +79,31 @@ span.tagbadge {
 }
 span.dow {
 	color: black;
-	background-color: purple;
+	background-color: purple !important;
 }
 span.dom {
  color: black;
- background-color: orchid;
+ background-color: orchid !important;
 }
 span.doh {
 	color: black;
-	background-color: coral;	
+	background-color: coral !important;	
 }
 span.dol {
 	color: black;
-	background-color: chocolate;
+	background-color: chocolate !important;
 }
 span.goldsaucer {
 	color: black;
-	background-color: gold;
+	background-color: gold !important;
 }
 span.other {
 	color: black;
-	background-color: lightgray;
+	background-color: lightgray !important;
 }
 span.custom {
 	color: black;
-	background-color: lightseagreen;
+	background-color: lightseagreen !important;
 }
 
 /** Changelog */

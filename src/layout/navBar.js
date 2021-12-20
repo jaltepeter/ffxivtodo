@@ -20,9 +20,11 @@ import { CustomItemDialog } from '../dialogs/customItemDialog';
 import { NavDropdown } from 'react-bootstrap';
 
 import { StorageKey } from '../enums';
-import { version as app_version } from '../../package.json';
+import * as packageInfo from '../../package.json';
 
 export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
+
+	const app_version = process.env.REACT_APP_VERSION;
 
 	const [isChangeLogModalOpen, setChangeLogModalOpen] = React.useState(false);
 	const [isPrefsModalOpen, setPrefsModalOpen] = React.useState(false);
@@ -45,13 +47,15 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 	const hideCustomItems = () => { setCustomItemOpen(false); }
 
 	const UpdateBadge = () => {
-		if (compareVersions.compare(app_version, prefs.lastVersion || '0.0.0', '>')) {
+		return null;
+
+/* 		if (compareVersions.compare(app_version, prefs.lastVersion || '0.0.0', '>')) {
 			return (
 				<>&nbsp;<img src={updateIcon} alt='' style={{ width: '2em' }} /></>
 			);
 		} else {
 			return null;
-		}
+		} */
 	}
 
 	return (
@@ -62,12 +66,12 @@ export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 			</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
-					<Nav className='mr-auto'></Nav>
+					<Nav className='me-auto'></Nav>
 					<Nav>
-						<Nav.Link onClick={showChangeLog} style={{ display: 'flex', alignItems: 'center' }}>Beta {app_version}<UpdateBadge /></Nav.Link>
+						<Nav.Link onClick={showChangeLog} style={{ display: 'flex', alignItems: 'center' }}>Changelog <UpdateBadge /></Nav.Link>
 					</Nav>
 					<Nav >
-						<NavDropdown title='Options' alignRight id='nav-options-dropdown'>
+						<NavDropdown title='Options' id='nav-options-dropdown'>
 							<NavDropdown.Item onClick={showPrefs}>Preferences</NavDropdown.Item>
 							<NavDropdown.Item onClick={showCustomItems}>Custom Items</NavDropdown.Item>
 							<NavDropdown.Divider />

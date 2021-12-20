@@ -1,6 +1,6 @@
 /** React */
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 /** CSS */
 import './css/bootstrap.min.css';
@@ -15,12 +15,12 @@ import { Footer } from './layout/footer';
 export function App() {
 	return (
 		<div>
-			<Switch>
-				<Route path="/" component={Main} exact />
-				<Route path="/privacy" component={Privacy} exact />
-				<Route path="/cookies" component={Cookies} exact />
-				<Redirect to="/" />
-			</Switch>
+			<Routes>
+				<Route path="/" element={<Main/>}  />
+				<Route path="/privacy" element={<Privacy/>}  />
+				<Route path="/cookies" element={<Cookies/>}  />
+				{/* <Navigate to="/" /> */}
+			</Routes>
 			<Footer />
 		</div>
 
