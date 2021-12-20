@@ -7,11 +7,11 @@ import Nav from 'react-bootstrap/Nav';
 import Image from 'react-bootstrap/Image';
 
 /** compare-versions */
-import compareVersions from 'compare-versions';
+// import compareVersions from 'compare-versions';
 
 /** images */
 import logo from '../img/questIcon.png';
-import updateIcon from '../img/updateIcon.png';
+// import updateIcon from '../img/updateIcon.png';
 
 /** components */
 import { ChangeLog } from '../dialogs/changelogDialog';
@@ -20,7 +20,7 @@ import { CustomItemDialog } from '../dialogs/customItemDialog';
 import { NavDropdown } from 'react-bootstrap';
 
 import { StorageKey } from '../enums';
-import * as packageInfo from '../../package.json';
+// import * as packageInfo from '../../package.json';
 
 export function NavBar({ showHideModeEnabled, toggleShowHideMode, prefs }) {
 
