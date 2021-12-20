@@ -18,7 +18,7 @@
 		"react-cookie-consent": "^7.0.1",
 		"react-dom": "^17.0.2",
 		"react-router-dom": "^6.2.1",
-		"react-scripts": "4.0.3",
+		"react-scripts": "5.0.0",
 		"uuid": "^8.3.2",
 		"web-vitals": "^2.1.2",
 		"yarn": "^1.22.17"
