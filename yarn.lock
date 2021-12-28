@@ -7014,10 +7014,10 @@ react-bootstrap@^2.0.3:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
-react-cookie-consent@^7.0.1:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/react-cookie-consent/-/react-cookie-consent-7.2.0.tgz#5e6c528468271c66ecc03aaa563a6f904f77af95"
-  integrity sha512-O3k8W3PF0Zd9E+G4cKSSd4EnbfybruL1evMY9ZCd0GGXG2SNG1lAPwBzoCJqtuQZcFZGOPB8NFkoYREWcTwFDA==
+react-cookie-consent@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/react-cookie-consent/-/react-cookie-consent-7.2.1.tgz#1ceb8dbd4d411fb88048f7b550ae0598299a6d7b"
+  integrity sha512-+mP3o9ip6PJyGvz10nTYeS1rVl/psxb8op9TB36KQQeMTLREH4ARRoUqhajzYYERa48rMwTOkpLGsOZUlY9nBg==
   dependencies:
     js-cookie "^2.2.1"
     prop-types "^15.7.2"
