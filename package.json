@@ -21,7 +21,7 @@
 		"react-scripts": "5.0.1",
 		"uuid": "^8.3.2",
 		"web-vitals": "^2.1.4",
-		"yarn": "^1.22.18"
+		"yarn": "^1.22.19"
 	},
 	"scripts": {
 		"start": "react-scripts start",
