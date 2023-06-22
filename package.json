@@ -10,7 +10,7 @@
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^12.1.5",
 		"@testing-library/user-event": "^14.4.3",
-		"bootstrap": "^5.2.2",
+		"bootstrap": "^5.2.3",
 		"compare-versions": "^5.0.1",
 		"luxon": "^3.3.0",
 		"react": "^17.0.2",
